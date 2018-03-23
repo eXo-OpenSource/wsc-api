@@ -56,15 +56,19 @@ class UserApi {
     }
     
     public static function login() {
-		$username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
+        $username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
         $password = (isset($_REQUEST['password'])) ? StringUtil::trim($_REQUEST['password']) : null;
-        
+
         if (empty($username)) {
 			throw new ApiException('username is missing', 400);
         }
 
         if (empty($password)) {
 			throw new ApiException('password is missing', 400);
+        }
+
+        if (strpos($username, "@")) {
+            $username = User::getUserByEmail($username) -> username;
         }
         
 		try {
