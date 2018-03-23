@@ -102,9 +102,28 @@ class UserApi {
             throw new ApiException('Invalid credentials', 412);
 		}
     }
+
+    public static function getPasswordHash() {
+		$username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
+        
+        if (empty($username)) {
+			throw new ApiException('username is missing', 400);
+        }
+        
+		try {
+            $user = User::getUserByUsername($username);
+            if ($user && $user->password == $hash){
+                return self::get($user->userID);
+            } else {
+                throw new ApiException('Invalid credentials', 412);
+            }
+		} catch(UserInputException $e) {
+            throw new ApiException('Invalid credentials', 412);
+		}
+    }
     
     
-    public static function get($userID = null) {
+    public static function get($userID = null, $passwordHash = false) {
         $userID = $userID ? $userID : ((isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null);
         
         if (empty($userID)) {
@@ -134,12 +153,18 @@ class UserApi {
             ));
         }
 
-        return array(
+        $result = array(
             'userID' => $user->userID,
             'username' => $user->username,
             'email' => $user->email,
             'groups' => $resultGroups
         );
+
+        if ($passwordHash) {
+            $result["hash"] = $user->password;
+        }
+
+        return $result;
     }
 
 }
