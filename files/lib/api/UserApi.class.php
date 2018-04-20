@@ -78,50 +78,6 @@ class UserApi {
             throw new ApiException('Invalid credentials', 412);
 		}
     }
-
-    public static function loginWithHash() {
-		$username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
-        $hash = (isset($_REQUEST['hash'])) ? StringUtil::trim($_REQUEST['hash']) : null;
-        
-        if (empty($username)) {
-			throw new ApiException('username is missing', 400);
-        }
-
-        if (empty($hash)) {
-			throw new ApiException('hash is missing', 400);
-        }
-        
-		try {
-            $user = User::getUserByUsername($username);
-            if ($user && $user->password == $hash){
-                return self::get($user->userID);
-            } else {
-                throw new ApiException('Invalid credentials', 412);
-            }
-		} catch(UserInputException $e) {
-            throw new ApiException('Invalid credentials', 412);
-		}
-    }
-
-    public static function getPasswordHash() {
-		$username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
-        
-        if (empty($username)) {
-			throw new ApiException('username is missing', 400);
-        }
-        
-		try {
-            $user = User::getUserByUsername($username);
-            if ($user && $user->password == $hash){
-                return self::get($user->userID);
-            } else {
-                throw new ApiException('Invalid credentials', 412);
-            }
-		} catch(UserInputException $e) {
-            throw new ApiException('Invalid credentials', 412);
-		}
-    }
-    
     
     public static function get($userID = null, $passwordHash = false) {
         $userID = $userID ? $userID : ((isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null);
