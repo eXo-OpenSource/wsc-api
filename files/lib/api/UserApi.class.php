@@ -35,6 +35,10 @@ class UserApi {
         
         if (empty($email)) {
 			throw new ApiException('email is missing', 400);
+        } else if (!UserUtil::isValidEmail($email)) {
+			throw new ApiException('email is invalid', 412);
+		} else if (!UserUtil::isAvailableEmail($email)) {
+			throw new ApiException('email is not notUnique', 412);
         }
 
         $languageID = WCF::getLanguage()->languageID;
