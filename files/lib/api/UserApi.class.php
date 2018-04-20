@@ -120,5 +120,39 @@ class UserApi {
             'groups' => $resultGroups
         );
     }
+    
+	public static function rename() {
+        $userID = (isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null;
+        $username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
+        
+        if (empty($userID)) {
+            throw new ApiException('userID is missing', 400);
+        } else if (!is_numeric($userID)) {
+            throw new ApiException('userID is invalid', 412);
+        }
+        
+        if (empty($username)) {
+			throw new ApiException('username is missing', 400);
+		} else if (!UserUtil::isValidUsername($username)) { // check for forbidden chars (e.g. the ",")
+			throw new ApiException('username is invalid', 412);
+		} else if (!UserUtil::isAvailableUsername($username)) { // Check if username exists already.
+			throw new ApiException('username is not notUnique', 412);
+        }
 
+        $users = User::getUsers([$userID]);
+
+        if (sizeof($users) !== 1) {
+            throw new ApiException('userID is invalid', 412);
+        }
+
+        $user = $users[$userID];
+
+        $action = new UserAction([$users[$userID]], 'update', [
+			'data' => [
+				'username' => $username
+			]
+        ]);
+        $action->executeAction();
+        return self::get($userID);
+    }
 }
