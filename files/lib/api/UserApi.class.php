@@ -79,7 +79,7 @@ class UserApi {
 		}
     }
     
-    public static function get($userID = null, $passwordHash = false) {
+    public static function get($userID = null) {
         $userID = $userID ? $userID : ((isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null);
         
         if (empty($userID)) {
@@ -109,18 +109,12 @@ class UserApi {
             ));
         }
 
-        $result = array(
+        return array(
             'userID' => $user->userID,
             'username' => $user->username,
             'email' => $user->email,
             'groups' => $resultGroups
         );
-
-        if ($passwordHash) {
-            $result["hash"] = $user->password;
-        }
-
-        return $result;
     }
 
 }
