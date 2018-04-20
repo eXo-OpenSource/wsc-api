@@ -58,7 +58,7 @@ class ApiException extends LoggedException {
 	 */
 	public function __construct($message, $errorType = self::INTERNAL_ERROR) {
 		$responseData = [
-			'code' => $errorType,
+			'status' => $errorType,
 			'message' => $message
 		];
 		
