@@ -5,4 +5,9 @@
 		<item name="wcf.acp.option.category.wsc_api.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.acp.option.wsc_api_secret"><![CDATA[Api-Secret]]></item>
 	</category>
+		<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.wscApi.secrets"><![CDATA[WSC Api]]></item>
+		<item name="wcf.acp.menu.link.wscApi.secrets.list"><![CDATA[Secrets]]></item>
+		<item name="wcf.acp.menu.link.wscApi.secrets.add"><![CDATA[Secret hinzufügen]]></item>
+	</category>
 </language>

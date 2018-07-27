@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/vortex/acpMenu.xsd">
+	<import>
+		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets">
+			<parent>wcf.acp.menu.link.application</parent>
+		</acpmenuitem>
+        
+		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets.list">
+			<controller>wcf\acp\form\ApiSecretsAddForm</controller>
+			<parent>wcf.acp.menu.link.wscApi.secrets</parent>
+			<permissions></permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+
+		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets.add">
+			<controller>wcf\acp\form\ApiSecretsAddForm</controller>
+			<parent>wcf.acp.menu.link.wscApi.secrets.list</parent>
+			<permissions></permissions>
+			<icon>fa-plus</icon>
+		</acpmenuitem>
+	</import>
+</data>

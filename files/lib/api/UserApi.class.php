@@ -10,6 +10,11 @@ use wcf\util\StringUtil;
 use wcf\system\exception\ApiException;
 use wcf\data\user\User;
 
+/*
+https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/form/SettingsForm.class.php
+cleaner update of options with error validation
+*/
+
 /**
  * @author 	Robert Bitschnau
  * @package	at.megathorx.wsc-api
@@ -113,45 +118,91 @@ class UserApi {
             ));
         }
 
+        $sql = "SELECT        user_option_value.*
+                FROM        wcf".WCF_N."_user_option_value user_option_value
+                WHERE        user_option_value.userID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute([$userID]);
+
+        $options = $statement->fetchArray();
+        
         return array(
             'userID' => $user->userID,
+            'wscApiId' => $user->wscApiId,
             'username' => $user->username,
             'email' => $user->email,
+            'options' => $options,
             'groups' => $resultGroups
         );
     }
-    
-	public static function rename() {
+
+	public static function update() {
         $userID = (isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null;
         $username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
-        
+        $wscApiId = (isset($_REQUEST['wscApiId'])) ? StringUtil::trim($_REQUEST['wscApiId']) : null;
+        $data = [];
+
         if (empty($userID)) {
             throw new ApiException('userID is missing', 400);
         } else if (!is_numeric($userID)) {
             throw new ApiException('userID is invalid', 412);
         }
         
-        if (empty($username)) {
-			throw new ApiException('username is missing', 400);
-		} else if (!UserUtil::isValidUsername($username)) { // check for forbidden chars (e.g. the ",")
-			throw new ApiException('username is invalid', 412);
-		} else if (!UserUtil::isAvailableUsername($username)) { // Check if username exists already.
-			throw new ApiException('username is not notUnique', 412);
-        }
 
         $users = User::getUsers([$userID]);
 
         if (sizeof($users) !== 1) {
             throw new ApiException('userID is invalid', 412);
         }
-
         $user = $users[$userID];
 
+        $sql = "SELECT        user_option_value.*
+                FROM        wcf".WCF_N."_user_option_value user_option_value
+                WHERE        user_option_value.userID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute([$userID]);
+
+        $options = $statement->fetchArray();
+        $newOptions = [];
+        $modifiedOptions = false;
+
+        foreach ($options as $key => $value) {
+            if ($key === 'userID') { continue; }
+
+            $numKey = str_replace('userOption', '', $key);
+            $newOptions[$numKey] = $value;
+
+            if (isset($_REQUEST[$key])) {
+                $modifiedOptions = true;
+                $newOptions[$numKey] = $_REQUEST[$key];
+            }
+        }
+        
+        if (empty($username) && empty($wscApiId) && !$modifiedOptions) {
+			throw new ApiException('no value to change provided (username or wscApiId allowed or userOptionXX)', 400);
+        }
+        
+        if (!empty($username)) {
+            if (!UserUtil::isValidUsername($username)) { // check for forbidden chars (e.g. the ",")
+                throw new ApiException('username is invalid', 412);
+            } else if (!UserUtil::isAvailableUsername($username)) { // Check if username exists already.
+                throw new ApiException('username is not notUnique', 412);
+            }
+            $data['username'] = $username;
+        }
+        
+        if (!empty($wscApiId)) {
+            if (!is_numeric($wscApiId)) {
+                throw new ApiException('wscApiId is invalid', 412);
+            }
+            $data['wscApiId'] = $wscApiId;
+        }
+
         $action = new UserAction([$users[$userID]], 'update', [
-			'data' => [
-				'username' => $username
-			]
+			'data' => $data,
+            'options' => $newOptions
         ]);
+
         $action->executeAction();
         return self::get($userID);
     }
