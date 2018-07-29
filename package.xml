@@ -22,6 +22,9 @@
 		<instruction type="language" />
 		<instruction type="acpTemplate" />
 		<instruction type="acpMenu" />
+		<instruction type="objectTypeDefinition" />
+		<instruction type="objectType" />
+		<instruction type="aclOption" />
 		<instruction type="sql">install.sql</instruction>
 	</instructions>
 
@@ -30,6 +33,9 @@
 		<instruction type="acpTemplate" />
 		<instruction type="acpMenu" />
 		<instruction type="language" />
+		<instruction type="objectTypeDefinition" />
+		<instruction type="objectType" />
+		<instruction type="aclOption" />
 		<instruction type="sql">install.sql</instruction>
 	</instructions>
 

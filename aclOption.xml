@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/vortex/aclOption.xsd">
+	<import>
+		<categories>
+			<!-- api -->
+			<category name="api.user">
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</category>
+			<category name="api.group">
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</category>
+			<!-- /api -->
+		</categories>
+		
+		<options>
+			<!-- api.user -->
+			<option name="canCreateUser">
+				<categoryname>api.user</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<option name="canUpdateUserName">
+				<categoryname>api.user</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<option name="canUpdateUserWscApiId">
+				<categoryname>api.user</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<option name="canUpdateUserOptions">
+				<categoryname>api.user</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<!-- /api.user -->
+
+			<!-- api.group -->
+			<option name="canGroupAddMember">
+				<categoryname>api.group</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<option name="canGroupRemoveMember">
+				<categoryname>api.group</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<!-- /api.group -->
+		</options>
+	</import>
+</data>

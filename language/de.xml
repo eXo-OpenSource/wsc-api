@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.category.wsc_api"><![CDATA[WSC-Api]]></item>
+		<item name="wcf.acp.option.category.wsc_api"><![CDATA[WSC-API]]></item>
 		<item name="wcf.acp.option.category.wsc_api.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.acp.option.wsc_api_secret"><![CDATA[Api-Secret]]></item>
 	</category>
-		<category name="wcf.acp.menu">
+	<category name="wcf.acp.secret">
+		<item name="wcf.acp.secret.category.general"><![CDATA[Allgemein]]></item>
+		<item name="wcf.acp.secret.category.permissions"><![CDATA[Berechtigungen]]></item>
+		<item name="wcf.acp.secret.secret"><![CDATA[API Secret]]></item>
+		<item name="wcf.acp.secret.generation"><![CDATA[Falls kein Secret eingetragen wird generiert das System eines.]]></item>
+		<item name="wcf.acp.secret.secretDescription"><![CDATA[Beschreibung]]></item>
+	</category>
+	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.wscApi.secrets"><![CDATA[WSC Api]]></item>
 		<item name="wcf.acp.menu.link.wscApi.secrets.list"><![CDATA[Secrets]]></item>
 		<item name="wcf.acp.menu.link.wscApi.secrets.add"><![CDATA[Secret hinzufügen]]></item>
+		<item name="wcf.acp.menu.wscApi.user"><![CDATA[Benutzer Api]]></item>
+		<item name="wcf.acp.menu.wscApi.user.create"><![CDATA[Erstellen]]></item>
+		<item name="wcf.acp.menu.wscApi.user.update"><![CDATA[Ändern]]></item>
+		<item name="wcf.acp.menu.wscApi.user.update.rename"><![CDATA[Umbennen]]></item>
+		<item name="wcf.acp.menu.wscApi.user.update.wscApiId"><![CDATA[API Id ändern]]></item>
+		<item name="wcf.acp.menu.wscApi.user.update.option"><![CDATA[Profilfeld aktualisieren]]></item>
+		<item name="wcf.acp.menu.wscApi.group"><![CDATA[Gruppen]]></item>
+		<item name="wcf.acp.menu.wscApi.group.addMember"><![CDATA[Mitglied hinzufügen]]></item>
+		<item name="wcf.acp.menu.wscApi.group.removeMember"><![CDATA[Mitglied entfernen]]></item>
+	</category>
+	<category name="wcf.acl.option">
+		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.user"><![CDATA[Benutzer API]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canCreateUser"><![CDATA[Erstellen]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserName"><![CDATA[Umbennen]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserWscApiId"><![CDATA[API Id ändern]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserOptions"><![CDATA[Profilfelder ändern]]></item>
+
+		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.group"><![CDATA[Gruppen API]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupAddMember"><![CDATA[Mitglied hinzufügen]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupRemoveMember"><![CDATA[Mitglied entfernen]]></item>
 	</category>
 </language>
