@@ -16,6 +16,7 @@
 		<item name="wcf.acp.menu.link.wscApi.secrets"><![CDATA[WSC Api]]></item>
 		<item name="wcf.acp.menu.link.wscApi.secrets.list"><![CDATA[Secrets]]></item>
 		<item name="wcf.acp.menu.link.wscApi.secrets.add"><![CDATA[Secret hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.wscApi.secrets.edit"><![CDATA[Secret bearbeiten]]></item>
 		<item name="wcf.acp.menu.wscApi.user"><![CDATA[Benutzer Api]]></item>
 		<item name="wcf.acp.menu.wscApi.user.create"><![CDATA[Erstellen]]></item>
 		<item name="wcf.acp.menu.wscApi.user.update"><![CDATA[Ändern]]></item>

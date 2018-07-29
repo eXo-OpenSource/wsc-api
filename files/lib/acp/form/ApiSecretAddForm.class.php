@@ -97,8 +97,8 @@ class ApiSecretAddForm extends AbstractForm {
 		parent::save();
 
 		$apiSecret = ApiSecretEditor::create([
-			'secretKey' => $_POST['secretKey'],
-			'secretDescription' => $_POST['secretDescription']
+			'secretKey' => $this->secretKey,
+			'secretDescription' => $this->secretDescription
 		]);
 		
 		ApiSecretPermissionHandler::getInstance()->save($apiSecret->secretID, $this->objectTypeID);

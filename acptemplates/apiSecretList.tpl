@@ -2,8 +2,16 @@
 
 <header class="contentHeader">
 	<div class="contentHeaderTitle">
-		<h1 class="contentTitle">{lang}wbb.acp.board.list{/lang}</h1>
+		<h1 class="contentTitle">{lang}wcf.acp.menu.link.wscApi.secrets.list{/lang}</h1>
 	</div>
+	
+	<nav class="contentHeaderNavigation">
+		<ul>
+			<li><a href="{link application='wcf' controller='ApiSecretAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.menu.link.wscApi.secrets.add{/lang}</span></a></li>
+			
+			{event name='contentHeaderNavigation'}
+		</ul>
+	</nav>
 </header>
 
 {hascontent}

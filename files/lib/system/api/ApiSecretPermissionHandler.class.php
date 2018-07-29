@@ -162,6 +162,25 @@ class ApiSecretPermissionHandler extends SingletonFactory {
 		while ($row = $statement->fetchArray()) {
 			$data['option'][$row['optionID']] = $row['optionValue'];
 		}
+
+		$data['grantAll'] = true;
+
+		foreach ($optionsIDs as $optionID) {
+			if (!isset($data['option'][$optionID]) || $data['option'][$optionID] !== 1) {
+				$data['grantAll'] = false;
+				break;
+			}
+		}
+
+		$data['denyAll'] = true;
+
+		foreach ($optionsIDs as $optionID) {
+			if (!isset($data['option'][$optionID]) || $data['option'][$optionID] !== 0) {
+				$data['denyAll'] = false;
+				break;
+			}
+		}
+
 	}
 
 	/**

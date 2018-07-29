@@ -8,11 +8,7 @@
 	
 	<nav class="contentHeaderNavigation">
 		<ul>
-			{if $action == 'edit'}
-				
-				<li><a class="jsButtonBoardCopy button"><span class="icon icon16 fa-files-o"></span> <span>{lang}wbb.acp.board.button.copy{/lang}</span></a></li>
-			{/if}
-			<li><a href="{link application='wbb' controller='BoardList'}{/link}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}wbb.acp.menu.link.board.list{/lang}</span></a></li>
+			<li><a href="{link application='wcf' controller='ApiSecretList'}{/link}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}wcf.acp.menu.link.wscApi.secrets.list{/lang}</span></a></li>
 			
 			{event name='contentHeaderNavigation'}
 		</ul>
@@ -83,10 +79,10 @@
 
                             <li class="aclFullAccess"><span>{lang}wcf.acl.option.fullAccess{/lang}</span>
                                 <label class="jsTooltip" title="{lang}wcf.acl.option.grant{/lang}">
-                                    <input type="checkbox" data-type="grant" id="grantAll_permissionsContainer">
+                                    <input type="checkbox" data-type="grant" {if $permissions.grantAll|isset && $permissions.grantAll == true}checked{/if} id="grantAll_permissionsContainer">
                                 </label>
                                 <label class="jsTooltip" title="{lang}wcf.acl.option.deny{/lang}">
-                                    <input type="checkbox" data-type="deny" id="denyAll_permissionsContainer">
+                                    <input type="checkbox" data-type="deny" {if $permissions.denyAll|isset && $permissions.denyAll == true}checked{/if} id="denyAll_permissionsContainer">
                                 </label>
                             </li>
 
@@ -96,10 +92,10 @@
                                 {if $option.categoryName == $category}
                                 <li><span>{lang}{$option.label}{/lang}</span>
                                     <label class="jsTooltip" title="{lang}wcf.acl.option.grant{/lang}">
-                                        <input type="checkbox" data-type="grant" data-option-id="{$id}" id="grant{$id}">
+                                        <input type="checkbox" data-type="grant" {if $permissions.option[$id]|isset}{if $permissions.option[$id] == 1}checked{/if}{/if} data-option-id="{$id}" id="grant{$id}">
                                     </label>
                                     <label class="jsTooltip" title="{lang}wcf.acl.option.deny{/lang}">
-                                        <input type="checkbox" data-type="deny" data-option-id="{$id}" id="deny{$id}">
+                                        <input type="checkbox" data-type="deny" {if $permissions.option[$id]|isset}{if $permissions.option[$id] == 0}checked{/if}{/if} data-option-id="{$id}" id="deny{$id}">
                                     </label>
                                 </li>
                                 {/if}
