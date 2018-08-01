@@ -3,7 +3,7 @@
 	<packageinformation>
 		<packagename>WSC-Api</packagename>
 		<packagedescription>WSC-Api</packagedescription>
-		<version>1.2.1</version>
+		<version>1.2.2</version>
 		<date>2018-03-23</date>
 	</packageinformation>
 
@@ -37,6 +37,10 @@
 		<instruction type="aclOption" />
 		<instruction type="option" />
 		<instruction type="sql">install.sql</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="1.2.1">
+		<instruction type="file" />
 	</instructions>
 
 	<compatibility>

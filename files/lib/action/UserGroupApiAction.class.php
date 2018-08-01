@@ -36,6 +36,6 @@ class UserGroupApiAction extends AbstractAjaxAction {
 	public function execute() {
 		parent::execute();
 		
-        $this->sendJsonResponse(array('status' => 200, 'data' => (new UserGroupApi())->execute()));
+        $this->sendJsonResponse((new UserGroupApi())->execute());
 	}
 }
