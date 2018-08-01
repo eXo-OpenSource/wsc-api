@@ -29,7 +29,9 @@
 	</category>
 	<category name="wcf.acl.option">
 		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.user"><![CDATA[Benutzer API]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchUserData"><![CDATA[Daten abrufen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canCreateUser"><![CDATA[Erstellen]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canLoginUser"><![CDATA[Zugangsdaten prüfen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserName"><![CDATA[Umbennen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserWscApiId"><![CDATA[API Id ändern]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserOptions"><![CDATA[Profilfelder ändern]]></item>

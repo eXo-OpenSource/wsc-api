@@ -1,5 +1,6 @@
 <?php
 namespace wcf\api;
+
 use wcf\data\user\UserAction;
 use wcf\data\user\group\UserGroup;
 use wcf\system\WCF;
@@ -19,9 +20,16 @@ cleaner update of options with error validation
  * @author 	Robert Bitschnau
  * @package	at.megathorx.wsc-api
  */
-class UserApi {
+class UserApi extends BaseApi {
 
-    public static function create() {
+	/**
+	 * Allowed methods
+	 * @var string[]
+	 */
+    public $allowedMethods = ['create', 'login', 'get', 'update'];
+
+    public function create() {
+        $this->checkPermission('user.canCreateUser');
 		$username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
 		$password = (isset($_REQUEST['password'])) ? StringUtil::trim($_REQUEST['password']) : null;
 		$email = (isset($_REQUEST['email'])) ? StringUtil::trim($_REQUEST['email']) : null;
@@ -61,10 +69,11 @@ class UserApi {
         $user = new UserAction([], 'create', $data);
         $result = $user->executeAction();
 
-        return self::get($result['returnValues']->userID);
+        return $this->get($result['returnValues']->userID);
     }
     
-    public static function login() {
+    public function login() {
+        $this->checkPermission('user.canLoginUser');
         $username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
         $password = (isset($_REQUEST['password'])) ? StringUtil::trim($_REQUEST['password']) : null;
 
@@ -82,13 +91,14 @@ class UserApi {
         
 		try {
 			$user = UserAuthenticationFactory::getInstance()->getUserAuthentication()->loginManually($username, $password);
-			return self::get($user->userID);
+			return $this->get($user->userID);
 		} catch(UserInputException $e) {
             throw new ApiException('Invalid credentials', 412);
 		}
     }
     
-    public static function get($userID = null) {
+    public function get($userID = null) {
+        $this->checkPermission('user.canFetchUserData');
         $userID = $userID ? $userID : ((isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null);
         
         if (empty($userID)) {
@@ -136,7 +146,7 @@ class UserApi {
         );
     }
 
-	public static function update() {
+	public function update() {
         $userID = (isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null;
         $username = (isset($_REQUEST['username'])) ? StringUtil::trim($_REQUEST['username']) : null;
         $wscApiId = (isset($_REQUEST['wscApiId'])) ? StringUtil::trim($_REQUEST['wscApiId']) : null;
@@ -177,6 +187,10 @@ class UserApi {
                 $newOptions[$numKey] = $_REQUEST[$key];
             }
         }
+
+        if($modifiedOptions) {
+            $this->checkPermission('user.canUpdateUserOptions');
+        }
         
         if (empty($username) && empty($wscApiId) && !$modifiedOptions) {
 			throw new ApiException('no value to change provided (username or wscApiId allowed or userOptionXX)', 400);
@@ -188,6 +202,7 @@ class UserApi {
             } else if (!UserUtil::isAvailableUsername($username)) { // Check if username exists already.
                 throw new ApiException('username is not notUnique', 412);
             }
+            $this->checkPermission('user.canUpdateUserName');
             $data['username'] = $username;
         }
         
@@ -195,6 +210,7 @@ class UserApi {
             if (!is_numeric($wscApiId)) {
                 throw new ApiException('wscApiId is invalid', 412);
             }
+            $this->checkPermission('user.canUpdateUserWscApiId');
             $data['wscApiId'] = $wscApiId;
         }
 
@@ -204,6 +220,6 @@ class UserApi {
         ]);
 
         $action->executeAction();
-        return self::get($userID);
+        return $this->get($userID);
     }
 }

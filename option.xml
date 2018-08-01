@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
-	<import>
-		<categories>
-			<category name="wsc_api">
-				<options>module_wsc_api</options>
-			</category>
-
-			<category name="wsc_api.general">
-				<parent>wsc_api</parent>
-			</category>
-		</categories>
-
-		<options>
-			<option name="module_wsc_api">
-				<categoryname>module.community</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
-
-			<option name="wsc_api_secret">
-				<categoryname>wsc_api.general</categoryname>
-				<optiontype>text</optiontype>
-			</option>
-		</options>
-	</import>
+	<delete>
+		<category name="wsc_api" />
+		<category name="wsc_api.general" />
+		<option name="module_wsc_api" />
+		<option name="wsc_api_secret" />
+	</delete>
 </data>

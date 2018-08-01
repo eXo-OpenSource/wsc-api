@@ -18,7 +18,6 @@
 
 	<instructions type="install">
 		<instruction type="file" />
-		<instruction type="option" />
 		<instruction type="language" />
 		<instruction type="acpTemplate" />
 		<instruction type="acpMenu" />
@@ -36,6 +35,7 @@
 		<instruction type="objectTypeDefinition" />
 		<instruction type="objectType" />
 		<instruction type="aclOption" />
+		<instruction type="option" />
 		<instruction type="sql">install.sql</instruction>
 	</instructions>
 

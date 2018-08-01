@@ -11,9 +11,17 @@ use wcf\data\user\User;
  * @author 	Robert Bitschnau
  * @package	at.megathorx.wsc-api
  */
-class UserGroupApi {
+class UserGroupApi extends BaseApi {
 
-    public static function add() {
+	/**
+	 * Allowed methods
+	 * @var string[]
+	 */
+    public $allowedMethods = ['add', 'remove'];
+
+    public function add() {
+        $this->checkPermission('group.canGroupAddMember');
+
         $userID = (isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null;
         $groupID = (isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null;
         
@@ -50,11 +58,12 @@ class UserGroupApi {
         ]);
         $action->executeAction();
         
-        return UserApi::get($userID);
+        return (new UserApi())->get($userID);
     }
 
 
-    public static function remove() {
+    public function remove() {
+        $this->checkPermission('group.canGroupRemoveMember');
         $userID = (isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null;
         $groupID = (isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null;
         
@@ -88,6 +97,6 @@ class UserGroupApi {
         ]);
         $action->executeAction();
         
-        return UserApi::get($userID);
+        return (new UserApi())->get($userID);
     }
 }

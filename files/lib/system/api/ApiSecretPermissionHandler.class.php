@@ -43,9 +43,33 @@ class ApiSecretPermissionHandler extends SingletonFactory {
 	 * @return	boolean
 	 */
 	public function getPermission($secretID, $permission) {
-		///if (isset($this->boardPermissions[$secretID][$permission])) return $this->boardPermissions[$secretID][$permission];
-		
-		//return WCF::getSession()->getPermission('user.board.'.$permission);
+		$objectTypeID = ACLHandler::getInstance()->getObjectTypeID('at.megathorx.wsc_api.apiSecret');
+		$categoryName = 'api.' . explode('.', $permission)[0];
+		$optionName = explode('.', $permission)[1];
+
+		$sql = "SELECT  *
+				FROM    wcf".WCF_N."_acl_option
+				WHERE   objectTypeID = ? AND
+				        categoryName = ? AND
+				        optionName = ? ";
+
+		$statement = \wcf\system\WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute([$objectTypeID, $categoryName, $optionName]);
+		$option = $statement->fetchSingleRow();
+
+		if (!$option) { return false; }
+
+		$sql = "SELECT  *
+				FROM    wcf".WCF_N."_acl_option_to_secret
+				WHERE   optionID = ? AND
+				        objectID = ?";
+
+		$statement = \wcf\system\WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute([$option['optionID'], $secretID]);
+		$permission = $statement->fetchSingleRow();
+
+		if (!$permission || $permission['optionValue'] === 0) { return false; }
+		return true;
 	}
 
 		/**
