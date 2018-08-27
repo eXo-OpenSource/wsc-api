@@ -8,14 +8,14 @@
 		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets.list">
 			<controller>wcf\acp\page\ApiSecretListPage</controller>
 			<parent>wcf.acp.menu.link.wscApi.secrets</parent>
-			<permissions></permissions>
+			<permissions>admin.wscApi.canManageSecret</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets.add">
 			<controller>wcf\acp\form\ApiSecretAddForm</controller>
 			<parent>wcf.acp.menu.link.wscApi.secrets.list</parent>
-			<permissions></permissions>
+			<permissions>admin.wscApi.canManageSecret</permissions>
 			<icon>fa-plus</icon>
 		</acpmenuitem>
 	</import>

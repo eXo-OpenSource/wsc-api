@@ -40,4 +40,8 @@
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupAddMember"><![CDATA[Mitglied hinzufügen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupRemoveMember"><![CDATA[Mitglied entfernen]]></item>
 	</category>
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.category.admin.wscApi"><![CDATA[WSC API]]></item>
+		<item name="wcf.acp.group.option.admin.wscApi.canManageSecret"><![CDATA[Kann Secrets verwalten]]></item>
+	</category>
 </language>

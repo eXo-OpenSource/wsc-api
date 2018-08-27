@@ -8,7 +8,7 @@ cd ../files
 cd ../acptemplates
 "C:\Program Files\7-Zip\7z.exe" a -ttar ../build/acptemplates.tar *
 cd ../build
-"C:\Program Files\7-Zip\7z.exe" a -ttar at.megathorx.wsc-api.tar files.tar acptemplates.tar ../package.xml ../option.xml ../acpMenu.xml ../install.sql ../objectType.xml ../objectTypeDefinition.xml ../aclOption.xml ../language
+"C:\Program Files\7-Zip\7z.exe" a -ttar at.megathorx.wsc-api.tar files.tar acptemplates.tar ../package.xml ../userGroupOption.xml ../option.xml ../acpMenu.xml ../install.sql ../objectType.xml ../objectTypeDefinition.xml ../aclOption.xml ../language
 del files.tar
 del acptemplates.tar
 cd ..
