@@ -17,7 +17,44 @@ class UserGroupApi extends BaseApi {
 	 * Allowed methods
 	 * @var string[]
 	 */
-    public $allowedMethods = ['add', 'remove'];
+    public $allowedMethods = ['add', 'remove', 'get'];
+
+    public function get()
+    {
+        $this->checkPermission('group.canFetchGroupData');
+        
+        $groupID = (isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null;
+
+        if (empty($groupID)) {
+            throw new ApiException('groupID is missing', 400);
+        }
+
+        if (!is_numeric($groupID)) {
+            throw new ApiException('groupID is invalid', 412);
+        }
+
+        $userGroup = UserGroup::getGroupByID($groupID);
+
+		$data = [
+			'groupID' => $userGroup->groupID,
+			'groupName' => $userGroup->getTitle(),
+            'members' => []
+		];
+		
+		$sql = 'SELECT u.userID, u.username FROM wcf'.WCF_N.'_user_to_group g INNER JOIN wcf'.WCF_N.'_user u ON u.userID = g.userID WHERE g.groupID = ?';
+
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute([
+			$groupID
+		]);
+		
+		while ($row = $statement->fetchArray()) {
+			array_push($data['members'], $row);
+		}
+		
+        return $data;
+    }
+
 
     public function add() {
         $this->checkPermission('group.canGroupAddMember');

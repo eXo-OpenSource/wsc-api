@@ -41,6 +41,12 @@ class ApiSecretAddForm extends AbstractForm {
 	 * @var	integer
 	 */
 	public $objectTypeID = 0;
+    
+	/**
+	 * object id
+	 * @var	integer
+	 */
+	public $secretID = 0;
 	
 	/**
 	 * secretKey
@@ -88,6 +94,23 @@ class ApiSecretAddForm extends AbstractForm {
 		/*
 		check if secret is available
 		*/
+		if (empty($this->secretDescription)) {
+			throw new UserInputException('secretDescription', 'empty');
+		}
+
+		$sql = 'SELECT COUNT(*) AS C FROM wcf1_api_secret WHERE secretKey = ? AND secretID <> ?';
+
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute([
+			$this->secretKey,
+			$this->secretID
+		]);
+		
+		$row = $statement->fetchArray();
+		
+		if (isset($row) && $row['C'] > 0) {
+			throw new UserInputException('secretKey', 'alreadyUsed');
+		}
 	}
 	
 	/**
@@ -104,6 +127,8 @@ class ApiSecretAddForm extends AbstractForm {
 		ApiSecretPermissionHandler::getInstance()->save($apiSecret->secretID, $this->objectTypeID);
 		// ACLHandler::getInstance()->disableAssignVariables();
 		
+		$this->secretKey = '';
+		$this->secretDescription = '';
 		// show success message
 		WCF::getTPL()->assign('success', true);
 	}
@@ -124,7 +149,9 @@ class ApiSecretAddForm extends AbstractForm {
 		
 		WCF::getTPL()->assign([
             'action' => 'add',
-            'permissions' => $permissions
+			'permissions' => $permissions,
+			'secretKey' => $this->secretKey,
+			'secretDescription' => $this->secretDescription
 		]);
 	}
 }

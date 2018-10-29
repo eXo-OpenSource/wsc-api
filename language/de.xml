@@ -11,6 +11,7 @@
 		<item name="wcf.acp.secret.secret"><![CDATA[API Secret]]></item>
 		<item name="wcf.acp.secret.generation"><![CDATA[Falls kein Secret eingetragen wird generiert das System eines.]]></item>
 		<item name="wcf.acp.secret.secretDescription"><![CDATA[Beschreibung]]></item>
+		<item name="wcf.acp.secret.error.alreadyUsed"><![CDATA[Es existiert bereits ein Secret mit diesem Key]]></item>
 	</category>
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.wscApi.secrets"><![CDATA[WSC Api]]></item>
@@ -37,6 +38,7 @@
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserOptions"><![CDATA[Profilfelder ändern]]></item>
 
 		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.group"><![CDATA[Gruppen API]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchGroupData"><![CDATA[Daten abrufen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupAddMember"><![CDATA[Mitglied hinzufügen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupRemoveMember"><![CDATA[Mitglied entfernen]]></item>
 	</category>

@@ -33,13 +33,7 @@ class ApiSecretEditForm extends ApiSecretAddForm {
 	/**
 	 * @inheritDoc
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.wscApi.secrets.edit';
-    
-	/**
-	 * object id
-	 * @var	integer
-	 */
-	public $secretID = 0;
+	public $activeMenuItem = 'wcf.acp.menu.link.wscApi.secrets';
 	
 	/**
 	 * user editor object

@@ -34,16 +34,14 @@
                 <dl{if $errorField == 'secretKey'} class="formError"{/if}>
                     <dt><label for="secretKey">{lang}wcf.acp.secret.secret{/lang}</label></dt>
                         <dd>
-                            <input type="text" id="secretKey" name="secretKey" value="{if $apiSecret|isset}{$apiSecret->secretKey}{/if}" maxlength="255" class="medium">
+                            <input type="text" id="secretKey" name="secretKey" value="{if $secretKey|isset && $secretKey != ''}{$secretKey}{elseif $apiSecret|isset}{$apiSecret->secretKey}{/if}" maxlength="255" class="medium">
                             <small>{lang}wcf.acp.secret.generation{/lang}</small>
                             {if $errorField == 'secretKey'}
                                 <small class="innerError">
                                 {if $errorType == 'empty'}
                                     {lang}wcf.global.form.error.empty{/lang}
-                                {elseif $errorType == 'multilingual'}
-                                    {lang}wcf.global.form.error.multilingual{/lang}
                                 {else}
-                                    {lang}wbb.acp.board.title.error.{@$errorType}{/lang}
+                                    {lang}wcf.acp.secret.error.{@$errorType}{/lang}
                                 {/if}
                             </small>
                         {/if}
@@ -53,15 +51,11 @@
                 <dl{if $errorField == 'secretDescription'} class="formError"{/if}>
                     <dt><label for="secretDescription">{lang}wcf.acp.secret.secretDescription{/lang}</label></dt>
                         <dd>
-                            <input type="text" id="secretDescription" name="secretDescription" value="{if $apiSecret|isset}{$apiSecret->secretDescription}{/if}" maxlength="255" class="medium">
+                            <input type="text" id="secretDescription" name="secretDescription" value="{if $secretDescription|isset && $secretDescription != ''}{$secretDescription}{elseif $apiSecret|isset}{$apiSecret->secretDescription}{/if}" maxlength="255" class="medium">
                             {if $errorField == 'secretDescription'}
                                 <small class="innerError">
                                 {if $errorType == 'empty'}
                                     {lang}wcf.global.form.error.empty{/lang}
-                                {elseif $errorType == 'multilingual'}
-                                    {lang}wcf.global.form.error.multilingual{/lang}
-                                {else}
-                                    {lang}wbb.acp.board.title.error.{@$errorType}{/lang}
                                 {/if}
                             </small>
                         {/if}

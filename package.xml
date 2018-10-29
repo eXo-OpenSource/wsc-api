@@ -3,7 +3,7 @@
 	<packageinformation>
 		<packagename>WSC-Api</packagename>
 		<packagedescription>WSC-Api</packagedescription>
-		<version>1.2.4</version>
+		<version>1.2.5</version>
 		<date>2018-03-23</date>
 	</packageinformation>
 
@@ -52,6 +52,13 @@
 
 	<instructions type="update" fromversion="1.2.3">
 		<instruction type="userGroupOption" />
+	</instructions>
+
+	<instructions type="update" fromversion="1.2.4">
+		<instruction type="file" />
+		<instruction type="language" />
+		<instruction type="aclOption" />
+		<instruction type="acpTemplate" />
 	</instructions>
 
 	<compatibility>

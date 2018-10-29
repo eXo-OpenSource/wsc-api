@@ -41,6 +41,10 @@
 			<!-- /api.user -->
 
 			<!-- api.group -->
+			<option name="canFetchGroupData">
+				<categoryname>api.group</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
 			<option name="canGroupAddMember">
 				<categoryname>api.group</categoryname>
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
