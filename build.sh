@@ -1,35 +1,59 @@
-#!/bin/sh
-cd build
-rm at.megathorx.api.tar
-rm at.megathorx.wsc-api.tar
+#!/bin/bash
+PACKAGE=at.megathorx.wsc_api.tar
+FILES=(package.xml aclOption.xml acpMenu.xml objectType.xml objectTypeDefinition.xml option.xml userGroupOption.xml userNotificationEvent.xml install.sql update_1.3.0.sql language)
 
-cd ../files
-tar -cvf ../build/files.tar lib
-cd ../templates
-tar -cvf ../build/templates.tar *
-cd ../acptemplates
-tar -cvf ../build/acptemplates.tar *
-cd ../build
-cp ../package.xml package.xml
-cp ../option.xml option.xml
-cp ../install.sql install.sql
-cp ../acpMenu.xml acpMenu.xml
-cp ../aclOption.xml aclOption.xml
-cp ../objectType.xml objectType.xml
-cp ../objectTypeDefinition.xml objectTypeDefinition.xml
-cp ../userGroupOption.xml userGroupOption.xml
-cp -r ../language language
-tar -cvf at.megathorx.wsc-api.tar package.xml files.tar templates.tar acptemplates.tar acpMenu.xml userGroupOption.xml aclOption.xml objectType.xml objectTypeDefinition.xml option.xml install.sql language
+cleanup() {
+    cd build
+    FILES_COUNT=$(ls -l | grep -v ^l | wc -l)
+    if [ $FILES_COUNT -ne 0 ]; then
+        rm -r *
+    fi
+    cd ..
+}
 
-rm files.tar
-rm templates.tar
-rm acptemplates.tar
-rm acpMenu.xml
-rm package.xml
-rm option.xml
-rm objectType.xml
-rm objectTypeDefinition.xml
-rm aclOption.xml
-rm userGroupOption.xml
-rm install.sql
-rm -rf language
+archive() {
+    cd $2
+    FILES_COUNT=$(ls -l | grep -v ^l | wc -l)
+    if [ $FILES_COUNT -eq 0 ]; then
+        tar -cf "../$1" -T /dev/null
+    else
+        tar -cf "../$1" *
+    fi
+    cd ..
+}
+
+copy_pips() {
+    for i in "${FILES[@]}"
+    do
+        cp -r $i build_tmp/.
+    done
+}
+
+
+if [ ! -d build ]; then
+    mkdir build
+fi
+
+if [ ! -d build_tmp ]; then
+    mkdir build_tmp
+fi
+
+cleanup
+
+if [ -d files ]; then
+    archive "build_tmp/files.tar" "files"
+fi
+
+if [ -d templates ]; then
+    archive "build_tmp/templates.tar" "templates"
+fi
+
+if [ -d acptemplates ]; then
+    archive "build_tmp/acptemplates.tar" "acptemplates"
+fi
+
+copy_pips
+
+archive "build/$PACKAGE" "build_tmp"
+
+rm -rf build_tmp

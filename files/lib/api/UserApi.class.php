@@ -6,11 +6,13 @@ use wcf\data\user\group\UserGroup;
 use wcf\system\WCF;
 use wcf\system\exception\UserInputException;
 use wcf\system\user\authentication\UserAuthenticationFactory;
+use wcf\system\user\notification\object\ApiNotificationUserNotificationObject;
 use wcf\util\UserUtil;
 use wcf\util\StringUtil;
 use wcf\system\exception\ApiException;
 use wcf\data\user\User;
-
+use wcf\system\user\notification\UserNotificationHandler;
+use wcf\data\ApiNotificationEditor;
 /*
 https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/form/SettingsForm.class.php
 cleaner update of options with error validation
@@ -26,7 +28,7 @@ class UserApi extends BaseApi {
 	 * Allowed methods
 	 * @var string[]
 	 */
-    public $allowedMethods = ['create', 'login', 'get', 'update'];
+    public $allowedMethods = ['create', 'login', 'get', 'update', 'notification'];
 
     public function create() {
         $this->checkPermission('user.canCreateUser');
@@ -221,5 +223,48 @@ class UserApi extends BaseApi {
 
         $action->executeAction();
         return $this->get($userID);
+    }
+
+    public function notification() {
+        $this->checkPermission('user.canCreateNotification');
+        
+        $userID = (isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null;
+        $title = (isset($_REQUEST['title'])) ? StringUtil::trim($_REQUEST['title']) : null;
+        $message = (isset($_REQUEST['message'])) ? StringUtil::trim($_REQUEST['message']) : null;
+        $url = (isset($_REQUEST['url'])) ? StringUtil::trim($_REQUEST['url']) : null;
+
+        if (empty($userID)) {
+            throw new ApiException('userID is missing', 400);
+        } else if (!is_numeric($userID)) {
+            throw new ApiException('userID is invalid', 412);
+        } else if (empty($title)) {
+            throw new ApiException('title is missing', 400);
+        } else if (empty($message)) {
+            throw new ApiException('message is missing', 400);
+        } else if (empty($url)) {
+            throw new ApiException('url is missing', 400);
+        }
+        
+        $users = User::getUsers([$userID]);
+
+        if (sizeof($users) !== 1) {
+            throw new ApiException('userID is invalid', 412);
+        }
+
+		$notification = ApiNotificationEditor::create([
+			'title' => $title,
+            'message' => $message,
+            'url' => $url,
+            'time' => time()
+        ]);
+        
+        UserNotificationHandler::getInstance()->fireEvent(
+            'notification',
+            'at.megathorx.wsc_api.api_notification',
+            new ApiNotificationUserNotificationObject($notification),
+            [$userID]
+        );
+
+        return 'success';
     }
 }

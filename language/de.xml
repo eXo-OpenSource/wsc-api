@@ -36,6 +36,7 @@
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserName"><![CDATA[Umbennen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserWscApiId"><![CDATA[API Id ändern]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserOptions"><![CDATA[Profilfelder ändern]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canCreateNotification"><![CDATA[Benachrichtigung erstellen]]></item>
 
 		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.group"><![CDATA[Gruppen API]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchGroupData"><![CDATA[Daten abrufen]]></item>

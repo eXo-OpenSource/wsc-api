@@ -38,6 +38,10 @@
 				<categoryname>api.user</categoryname>
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</option>
+			<option name="canCreateNotification">
+				<categoryname>api.user</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
 			<!-- /api.user -->
 
 			<!-- api.group -->

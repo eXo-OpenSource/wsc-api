@@ -1,2 +1,3 @@
-build/at.megathorx.wsc-api.tar
+build/at.megathorx.wsc_api.tar
+build_tmp/
 .DS_Store

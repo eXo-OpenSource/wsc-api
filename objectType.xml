@@ -7,5 +7,13 @@
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
 		<!-- /ACL -->
+
+
+		<type>
+			<name>at.megathorx.wsc_api.api_notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>wcf\system\user\notification\object\type\ApiNotificationUserNotificationObjectType</classname>
+			<category>at.megathorx.wsc_api</category>
+		</type>
     </import>
 </data>
