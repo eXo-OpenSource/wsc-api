@@ -101,51 +101,91 @@ class UserApi extends BaseApi {
     
     public function get($userID = null) {
         $this->checkPermission('user.canFetchUserData');
-        $userID = $userID ? $userID : ((isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null);
-        
+
+        $userIDs = [];
+        $requestMultiple = false;
+
         if (empty($userID)) {
-            throw new ApiException('userID is missing', 400);
-        } else if (!is_numeric($userID)) {
-            throw new ApiException('userID is invalid', 412);
-        }
+            $userID = $_REQUEST['userID'];
+
+            if (is_array($userID)) {
+                $requestMultiple = true;
+                foreach ($userID as $user) {
+                    $user = StringUtil::trim($user);
+                    if (empty($user)) {
+                        throw new ApiException('userID is missing', 400);
+                    } else if (!is_numeric($user)) {
+                        throw new ApiException('userID is invalid', 412);
+                    }
+                    array_push($userIDs, $user);
+                }
+            } else {
+                $userID = StringUtil::trim($userID);
+                if (empty($userID)) {
+                    throw new ApiException('userID is missing', 400);
+                } else if (!is_numeric($userID)) {
+                    throw new ApiException('userID is invalid', 412);
+                }
+                $userIDs = [$userID];
+            }
+        } else {
+            if (is_array($userID)) {
+                $requestMultiple = true;
+                $userIDs = $userID;
+            } else {
+                $userIDs = [$userID];
+            }
+        }    
         
-        $users = User::getUsers([$userID]);
+        $users = User::getUsers($userIDs);
 
-        if (sizeof($users) !== 1) {
+        if (sizeof($users) === 0) {
             throw new ApiException('userID is invalid', 412);
         }
 
-        $user = $users[$userID];
-        $groupIDs = $user->getGroupIDs();
-
-        $groups = UserGroup::getGroupsByIDs($groupIDs);
-        $resultGroups = array();
         $lang = WCF::getLanguage();
-        
-        foreach ($groups as $id => $group) {
-            array_push($resultGroups, array(
-                'groupID' => $id,
-                'groupName' => $lang->getDynamicVariable($group->groupName),
-                'groupType' => $group->groupType
-            ));
+
+        $response = [];
+
+        foreach ($users as $index => $user) {
+            $groupIDs = $user->getGroupIDs();
+            $groups = UserGroup::getGroupsByIDs($groupIDs);
+            
+            $resultGroups = array();
+            
+            foreach ($groups as $id => $group) {
+                array_push($resultGroups, array(
+                    'groupID' => $id,
+                    'groupName' => $lang->getDynamicVariable($group->groupName),
+                    'groupType' => $group->groupType
+                ));
+            }
+            
+            $sql = "SELECT        user_option_value.*
+                    FROM        wcf".WCF_N."_user_option_value user_option_value
+                    WHERE        user_option_value.userID = ?";
+            $statement = WCF::getDB()->prepareStatement($sql);
+            $statement->execute([$index]);
+
+            $options = $statement->fetchArray();
+
+            $response[$index] = [
+                'userID' => $user->userID,
+                'wscApiId' => $user->wscApiId,
+                'username' => $user->username,
+                'email' => $user->email,
+                'options' => $options,
+                'groups' => $resultGroups
+            ];
         }
 
-        $sql = "SELECT        user_option_value.*
-                FROM        wcf".WCF_N."_user_option_value user_option_value
-                WHERE        user_option_value.userID = ?";
-        $statement = WCF::getDB()->prepareStatement($sql);
-        $statement->execute([$userID]);
 
-        $options = $statement->fetchArray();
+        if ($requestMultiple) {
+            return $response;
+        } else {
+            return $response[$userIDs[0]];
+        }
         
-        return array(
-            'userID' => $user->userID,
-            'wscApiId' => $user->wscApiId,
-            'username' => $user->username,
-            'email' => $user->email,
-            'options' => $options,
-            'groups' => $resultGroups
-        );
     }
 
 	public function update() {

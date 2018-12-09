@@ -3,7 +3,7 @@
 	<packageinformation>
 		<packagename>WSC-Api</packagename>
 		<packagedescription>WSC-Api</packagedescription>
-		<version>1.3.0</version>
+		<version>1.3.1</version>
 		<date>2018-03-23</date>
 	</packageinformation>
 
@@ -67,6 +67,10 @@
 		<instruction type="objectType" />
 		<instruction type="userNotificationEvent" />
 		<instruction type="sql">update_1.3.0.sql</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="1.3.0">
+		<instruction type="file" />
 	</instructions>
 
 	<compatibility>
