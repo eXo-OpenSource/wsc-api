@@ -19,11 +19,11 @@ class UserGroupApi extends BaseApi {
 	 */
     public $allowedMethods = ['add', 'remove', 'get'];
 
-    public function get()
+    public function get($groupID = null)
     {
         $this->checkPermission('group.canFetchGroupData');
         
-        $groupID = (isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null;
+        $groupID = $groupID ? $groupID : ((isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null);
 
         if (empty($groupID)) {
             throw new ApiException('groupID is missing', 400);
@@ -114,11 +114,7 @@ class UserGroupApi extends BaseApi {
             $action->executeAction();
         }
         
-        if ($requestMultiple) {
-            return (new UserApi())->get($userIDs);
-        } else {
-            return (new UserApi())->get($userIDs[0]);
-        }
+        return $this->get($groupID);
     }
 
 
@@ -175,10 +171,6 @@ class UserGroupApi extends BaseApi {
         ]);
         $action->executeAction();
         
-        if ($requestMultiple) {
-            return (new UserApi())->get($userIDs);
-        } else {
-            return (new UserApi())->get($userIDs[0]);
-        }
+        return $this->get($groupID);
     }
 }
