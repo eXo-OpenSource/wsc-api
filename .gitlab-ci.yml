@@ -12,6 +12,6 @@ build:
   script:
     - 'apt-get update && apt-get --yes install curl'
     - ./build.sh
-    - ./build/upload.sh
+    - ./upload.sh
   only:
     - tags
