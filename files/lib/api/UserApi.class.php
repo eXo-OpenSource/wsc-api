@@ -246,6 +246,8 @@ class UserApi extends BaseApi {
             }
             $this->checkPermission('user.canUpdateUserName');
             $data['username'] = $username;
+            $data['lastUsernameChange'] = TIME_NOW;
+            $data['oldUsername'] = $user->username;
         }
         
         if (!empty($wscApiId)) {
