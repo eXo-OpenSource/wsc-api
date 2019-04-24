@@ -57,3 +57,5 @@ copy_pips
 archive "build/$PACKAGE" "build_tmp"
 
 rm -rf build_tmp
+
+ls -l build/
