@@ -1,5 +1,6 @@
 <?php
 namespace wcf\api;
+
 use wcf\data\user\UserAction;
 use wcf\data\user\group\UserGroup;
 use wcf\system\WCF;
@@ -104,11 +105,9 @@ class UserGroupApi extends BaseApi {
         }
 
         foreach ($users as $index => $user) {
-            $groupIDs = $user->getGroupIDs();
-            $groupIDs = array_merge($groupIDs, array($groupID));
-            
             $action = new UserAction([$user], 'addToGroups', [
-                'groups' => $groupIDs,
+                'groups' => [$groupID],
+                'deleteOldGroups' => false,
                 'addDefaultGroups' => false
             ]);
             $action->executeAction();
@@ -166,7 +165,7 @@ class UserGroupApi extends BaseApi {
         }
 
         $action = new UserAction($users, 'removeFromGroups', [
-            'groups' => array($groupID),
+            'groups' => [$groupID],
             'addDefaultGroups' => false
         ]);
         $action->executeAction();

@@ -9,6 +9,9 @@
 			<category name="api.group">
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</category>
+			<category name="api.trophy">
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</category>
 			<!-- /api -->
 		</categories>
 		
@@ -58,6 +61,21 @@
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</option>
 			<!-- /api.group -->
+
+			<!-- api.trophy -->
+			<option name="canFetchTrophyData">
+				<categoryname>api.trophy</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<option name="canTrophyAddUser">
+				<categoryname>api.trophy</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<option name="canTrophyRemoveUser">
+				<categoryname>api.trophy</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<!-- /api.trophy -->
 		</options>
 	</import>
 </data>

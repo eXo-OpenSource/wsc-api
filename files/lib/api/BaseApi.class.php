@@ -1,15 +1,8 @@
 <?php
 namespace wcf\api;
 
-use wcf\data\user\UserAction;
-use wcf\data\user\group\UserGroup;
-use wcf\system\WCF;
-use wcf\system\exception\UserInputException;
-use wcf\system\user\authentication\UserAuthenticationFactory;
-use wcf\util\UserUtil;
 use wcf\util\StringUtil;
 use wcf\system\exception\ApiException;
-use wcf\data\user\User;
 use wcf\system\api\ApiSecretPermissionHandler;
 
 /**

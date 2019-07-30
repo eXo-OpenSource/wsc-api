@@ -42,6 +42,11 @@
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchGroupData"><![CDATA[Daten abrufen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupAddMember"><![CDATA[Mitglied hinzufügen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canGroupRemoveMember"><![CDATA[Mitglied entfernen]]></item>
+
+		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.trophy"><![CDATA[Trophäen API]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchTrophyData"><![CDATA[Daten abrufen]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canTrophyAddUser"><![CDATA[Vergeben]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canTrophyRemoveUser"><![CDATA[Entfernen]]></item>
 	</category>
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.admin.wscApi"><![CDATA[WSC API]]></item>

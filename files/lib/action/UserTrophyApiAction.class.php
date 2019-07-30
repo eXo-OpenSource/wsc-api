@@ -1,13 +1,13 @@
 <?php
 namespace wcf\action;
 
-use wcf\api\UserApi;
+use wcf\api\UserTrophyApi;
 
 /**
  * @author 	Robert Bitschnau
  * @package	at.megathorx.wsc-api
  */
-class UserApiAction extends AbstractAjaxAction {
+class UserTrophyApiAction extends AbstractAjaxAction {
 
 	/**
 	 * @inheritDoc
@@ -22,6 +22,6 @@ class UserApiAction extends AbstractAjaxAction {
 	public function execute() {
 		parent::execute();
 		
-        $this->sendJsonResponse((new UserApi())->execute());
+        $this->sendJsonResponse((new UserTrophyApi())->execute());
 	}
 }
