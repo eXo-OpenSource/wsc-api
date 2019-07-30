@@ -10,7 +10,7 @@ services:
 build:
   stage: build
   script:
-    - 'apk update && apk add curl tar'
+    - 'apk update && apk add curl tar bash'
     - ./build.sh
     - ./upload.sh
   only:
