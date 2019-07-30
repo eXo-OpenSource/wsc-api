@@ -1,4 +1,4 @@
-image: ubuntu:latest
+image: alpine:latest
 
 
 stages:
@@ -10,7 +10,7 @@ services:
 build:
   stage: build
   script:
-    - 'apt-get update && apt-get --yes install curl'
+    - 'apk update && apk add curl tar'
     - ./build.sh
     - ./upload.sh
   only:
