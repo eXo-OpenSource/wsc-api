@@ -28,7 +28,7 @@ class UserApi extends BaseApi {
 	 * Allowed methods
 	 * @var string[]
 	 */
-    public $allowedMethods = ['create', 'login', 'get', 'update', 'notification'];
+    public $allowedMethods = ['create', 'login', 'get', 'getByName', 'update', 'notification'];
 
     public function create() {
         $this->checkPermission('user.canCreateUser');
@@ -185,6 +185,60 @@ class UserApi extends BaseApi {
         } else {
             return $response[$userIDs[0]];
         }
+        
+    }
+    
+    public function getByName() {
+        $this->checkPermission('user.canFetchUserData');
+
+        $username = $_REQUEST['username'];
+
+        $username = StringUtil::trim($username);
+        if (empty($username)) {
+            throw new ApiException('username is missing', 400);
+        } else if (!is_string($username)) {
+            throw new ApiException('username is invalid', 412);
+        }
+        
+        $user = User::getUserByUsername($username);
+
+        if (!$user->userID) {
+            throw new ApiException('username is invalid', 412);
+        }
+
+        $lang = WCF::getLanguage();
+
+        $groupIDs = $user->getGroupIDs();
+        $groups = UserGroup::getGroupsByIDs($groupIDs);
+        
+        $resultGroups = array();
+        
+        foreach ($groups as $id => $group) {
+            array_push($resultGroups, array(
+                'groupID' => $id,
+                'groupName' => $lang->getDynamicVariable($group->groupName),
+                'groupType' => $group->groupType
+            ));
+        }
+        
+        $sql = "SELECT        user_option_value.*
+                FROM        wcf".WCF_N."_user_option_value user_option_value
+                WHERE        user_option_value.userID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute([$user->userID]);
+
+        $options = $statement->fetchArray();
+
+        $response = [
+            'userID' => $user->userID,
+            'wscApiId' => $user->wscApiId,
+            'username' => $user->username,
+            'email' => $user->email,
+            'options' => $options,
+            'groups' => $resultGroups
+        ];
+
+        return $response;
         
     }
 
