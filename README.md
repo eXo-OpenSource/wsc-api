@@ -22,6 +22,10 @@ Parameters
 Parameters
 * userID
 
+### getByName
+Parameters
+* username
+
 ### update
 Parameters
 * userID
