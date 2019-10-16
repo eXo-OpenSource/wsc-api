@@ -12,6 +12,9 @@
 			<category name="api.trophy">
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</category>
+			<category name="api.thread">
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</category>
 			<!-- /api -->
 		</categories>
 		
@@ -76,6 +79,13 @@
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</option>
 			<!-- /api.trophy -->
+
+			<!-- api.thread -->
+			<option name="canFetchThreadData">
+				<categoryname>api.thread</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<!-- /api.thread -->
 		</options>
 	</import>
 </data>

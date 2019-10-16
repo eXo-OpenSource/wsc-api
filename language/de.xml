@@ -47,6 +47,9 @@
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchTrophyData"><![CDATA[Daten abrufen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canTrophyAddUser"><![CDATA[Vergeben]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canTrophyRemoveUser"><![CDATA[Entfernen]]></item>
+
+		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.thread"><![CDATA[Thread API]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchThreadData"><![CDATA[Daten abrufen]]></item>
 	</category>
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.admin.wscApi"><![CDATA[WSC API]]></item>
