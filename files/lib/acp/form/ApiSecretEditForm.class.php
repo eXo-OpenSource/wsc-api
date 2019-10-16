@@ -23,7 +23,7 @@ use wcf\system\api\ApiSecretPermissionHandler;
 
 /**
  * Shows the user edit form.
- * 
+ *
  * @author	Marcel Werk
  * @copyright	2001-2018 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -34,7 +34,7 @@ class ApiSecretEditForm extends ApiSecretAddForm {
 	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.wscApi.secrets';
-	
+
 	/**
 	 * user editor object
 	 * @var	ApiSecretEditor
@@ -45,7 +45,7 @@ class ApiSecretEditForm extends ApiSecretAddForm {
 	 * @inheritDoc
 	 */
 	public $neededPermissions = [];
-		
+
 	/**
 	 * @inheritDoc
 	 */
@@ -55,42 +55,42 @@ class ApiSecretEditForm extends ApiSecretAddForm {
 		if (!$apiSecret->secretID) {
 			throw new IllegalLinkException();
 		}
-		
+
 		$this->apiSecret = new ApiSecretEditor($apiSecret);
 		/*if (!UserGroup::isAccessibleGroup($this->user->getGroupIDs())) {
 			throw new PermissionDeniedException();
 		}*/
-		
+
 		parent::readParameters();
     }
-    
+
 	/**
 	 * @inheritDoc
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
+
 		WCF::getTPL()->assign([
 			'secretID' => $this->apiSecret->secretID,
 			'action' => 'edit',
 			'apiSecret' => $this->apiSecret
 		]);
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
@@ -101,14 +101,14 @@ class ApiSecretEditForm extends ApiSecretAddForm {
 			'secretKey' => $this->secretKey,
 			'secretDescription' => $this->secretDescription
 		]);
-		
+
 		$this->apiSecret = new ApiSecretEditor(new ApiSecret($this->apiSecret->secretID));
-		
+
 		ApiSecretPermissionHandler::getInstance()->save($this->apiSecret->secretID, $this->objectTypeID);
 
 		WCF::getTPL()->assign('success', true);
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */

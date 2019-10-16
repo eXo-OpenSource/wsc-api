@@ -19,7 +19,7 @@ use wcf\data\ApiSecretEditor;
 
 /**
  * Shows the board add form.
- * 
+ *
  * @author	Alexander Ebert
  * @copyright	2001-2018 WoltLab GmbH
  * @license	WoltLab License <http://www.woltlab.com/license-agreement.html>
@@ -35,31 +35,31 @@ class ApiSecretAddForm extends AbstractForm {
 	 * @inheritDoc
 	 */
 	public $neededPermissions = [];
-	
+
 	/**
 	 * object type id
 	 * @var	integer
 	 */
 	public $objectTypeID = 0;
-    
+
 	/**
 	 * object id
 	 * @var	integer
 	 */
 	public $secretID = 0;
-	
+
 	/**
 	 * secretKey
 	 * @var	string
 	 */
 	public $secretKey = '';
-	
+
 	/**
 	 * secretDescription
 	 * @var	string
 	 */
 	public $secretDescription = '';
-	
+
 	/**
 	 * @inheritDoc
 	 */
@@ -67,13 +67,13 @@ class ApiSecretAddForm extends AbstractForm {
 		parent::readParameters();
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('at.megathorx.wsc_api.apiSecret');
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
-		
+
 		if (!empty($_POST['secretKey'])) {
 			$this->secretKey = StringUtil::trim($_POST['secretKey']);
 		} else {
@@ -84,7 +84,7 @@ class ApiSecretAddForm extends AbstractForm {
 			$this->secretDescription = StringUtil::trim($_POST['secretDescription']);
 		}
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
@@ -105,14 +105,14 @@ class ApiSecretAddForm extends AbstractForm {
 			$this->secretKey,
 			$this->secretID
 		]);
-		
+
 		$row = $statement->fetchArray();
-		
+
 		if (isset($row) && $row['C'] > 0) {
 			throw new UserInputException('secretKey', 'alreadyUsed');
 		}
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
@@ -123,30 +123,30 @@ class ApiSecretAddForm extends AbstractForm {
 			'secretKey' => $this->secretKey,
 			'secretDescription' => $this->secretDescription
 		]);
-		
+
 		ApiSecretPermissionHandler::getInstance()->save($apiSecret->secretID, $this->objectTypeID);
 		// ACLHandler::getInstance()->disableAssignVariables();
-		
+
 		$this->secretKey = '';
 		$this->secretDescription = '';
 		// show success message
 		WCF::getTPL()->assign('success', true);
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function assignVariables() {
         parent::assignVariables();
 		$permissions = ApiSecretPermissionHandler::getInstance()->getPermissions($this->objectTypeID, [1], 'api.*', true);
-		
+
 		WCF::getTPL()->assign([
             'action' => 'add',
 			'permissions' => $permissions,

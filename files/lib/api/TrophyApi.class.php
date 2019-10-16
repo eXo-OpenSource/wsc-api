@@ -1,7 +1,6 @@
 <?php
 namespace wcf\api;
 
-use wcf\util\StringUtil;
 use wcf\system\exception\ApiException;
 use wcf\data\trophy\TrophyList;
 
@@ -11,15 +10,11 @@ use wcf\data\trophy\TrophyList;
  */
 class TrophyApi extends BaseApi {
 
-	/**
-	 * Allowed methods
-	 * @var string[]
-	 */
-    public $allowedMethods = ['index', 'get'];
-
+    /**
+     * @api
+     * @permission('trophy.canFetchTrophyData')
+     */
     public function index() {
-        $this->checkPermission('trophy.canFetchTrophyData');
-
 		$trophyList = new TrophyList();
         $trophyList->readObjects();
 
@@ -51,13 +46,13 @@ class TrophyApi extends BaseApi {
         return $data;
     }
     
+    /**
+     * @api
+     * @permission('trophy.canFetchTrophyData')
+     */
     public function get($trophyID = null) {
-        $this->checkPermission('trophy.canFetchTrophyData');
-
-        $trophyID = $trophyID ? $trophyID : ((isset($_REQUEST['trophyID'])) ? StringUtil::trim($_REQUEST['trophyID']) : null);
-
         if (empty($trophyID)) {
-            throw new ApiException('trophyID is missing', 400);
+            throw new ApiException('trophyID is required', 400);
         }
 
 		$trophyList = new TrophyList();

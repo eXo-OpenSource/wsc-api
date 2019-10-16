@@ -14,12 +14,12 @@ class ApiNotificationAction extends AbstractDatabaseObjectAction  {
 	 * @inheritDoc
 	 */
 	public $className = ApiNotificationEditor::class;
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	protected $permissionsDelete = [];
-	
+
 	/**
 	 * @inheritDoc
 	 */

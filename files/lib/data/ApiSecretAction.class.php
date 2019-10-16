@@ -14,12 +14,12 @@ class ApiSecretAction extends AbstractDatabaseObjectAction  {
 	 * @inheritDoc
 	 */
 	public $className = ApiSecretEditor::class;
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	protected $permissionsDelete = ['admin.wscApi.canManageSecret'];
-	
+
 	/**
 	 * @inheritDoc
 	 */

@@ -14,20 +14,14 @@ use wcf\data\user\User;
  */
 class UserGroupApi extends BaseApi {
 
-	/**
-	 * Allowed methods
-	 * @var string[]
-	 */
-    public $allowedMethods = ['add', 'remove', 'get'];
-
+    /**
+     * @api
+     * @permission('group.canFetchGroupData')
+     */
     public function get($groupID = null)
     {
-        $this->checkPermission('group.canFetchGroupData');
-        
-        $groupID = $groupID ? $groupID : ((isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null);
-
         if (empty($groupID)) {
-            throw new ApiException('groupID is missing', 400);
+            throw new ApiException('groupID is required', 400);
         }
 
         if (!is_numeric($groupID)) {
@@ -41,25 +35,26 @@ class UserGroupApi extends BaseApi {
 			'groupName' => $userGroup->getTitle(),
             'members' => []
 		];
-		
+
 		$sql = 'SELECT u.userID, u.username FROM wcf'.WCF_N.'_user_to_group g INNER JOIN wcf'.WCF_N.'_user u ON u.userID = g.userID WHERE g.groupID = ?';
 
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute([
 			$groupID
 		]);
-		
+
 		while ($row = $statement->fetchArray()) {
 			array_push($data['members'], $row);
 		}
-		
+
         return $data;
     }
 
-
-    public function add() {
-        $this->checkPermission('group.canGroupAddMember');
-
+    /**
+     * @api
+     * @permission('group.canGroupAddMember')
+     */
+    public function add($groupID, $userID) {
         $groupID = (isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null;
 
         if (empty($groupID)) {
@@ -73,29 +68,25 @@ class UserGroupApi extends BaseApi {
         $userIDs = [];
         $requestMultiple = false;
 
-        if (empty($userID)) {
-            $userID = $_REQUEST['userID'];
-
-            if (is_array($userID)) {
-                $requestMultiple = true;
-                foreach ($userID as $user) {
-                    $user = StringUtil::trim($user);
-                    if (empty($user)) {
-                        throw new ApiException('userID is missing', 400);
-                    } else if (!is_numeric($user)) {
-                        throw new ApiException('userID is invalid', 412);
-                    }
-                    array_push($userIDs, $user);
-                }
-            } else {
-                $userID = StringUtil::trim($userID);
-                if (empty($userID)) {
-                    throw new ApiException('userID is missing', 400);
-                } else if (!is_numeric($userID)) {
+        if (is_array($userID)) {
+            $requestMultiple = true;
+            foreach ($userID as $user) {
+                $user = StringUtil::trim($user);
+                if (empty($user)) {
+                    throw new ApiException('userID is required', 400);
+                } else if (!is_numeric($user)) {
                     throw new ApiException('userID is invalid', 412);
                 }
-                $userIDs = [$userID];
+                array_push($userIDs, $user);
             }
+        } else {
+            $userID = StringUtil::trim($userID);
+            if (empty($userID)) {
+                throw new ApiException('userID is required', 400);
+            } else if (!is_numeric($userID)) {
+                throw new ApiException('userID is invalid', 412);
+            }
+            $userIDs = [$userID];
         }
 
         $users = User::getUsers($userIDs);
@@ -112,18 +103,17 @@ class UserGroupApi extends BaseApi {
             ]);
             $action->executeAction();
         }
-        
+
         return $this->get($groupID);
     }
 
-
-    public function remove() {
-        $this->checkPermission('group.canGroupRemoveMember');
-        
-        $groupID = (isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null;
-
+    /**
+     * @api
+     * @permission('group.canGroupRemoveMember')
+     */
+    public function remove($groupID, $userID) {
         if (empty($groupID)) {
-            throw new ApiException('groupID is missing', 400);
+            throw new ApiException('groupID is required', 400);
         }
 
         if (!is_numeric($groupID)) {
@@ -133,29 +123,25 @@ class UserGroupApi extends BaseApi {
         $userIDs = [];
         $requestMultiple = false;
 
-        if (empty($userID)) {
-            $userID = $_REQUEST['userID'];
-
-            if (is_array($userID)) {
-                $requestMultiple = true;
-                foreach ($userID as $user) {
-                    $user = StringUtil::trim($user);
-                    if (empty($user)) {
-                        throw new ApiException('userID is missing', 400);
-                    } else if (!is_numeric($user)) {
-                        throw new ApiException('userID is invalid', 412);
-                    }
-                    array_push($userIDs, $user);
-                }
-            } else {
-                $userID = StringUtil::trim($userID);
-                if (empty($userID)) {
-                    throw new ApiException('userID is missing', 400);
-                } else if (!is_numeric($userID)) {
+        if (is_array($userID)) {
+            $requestMultiple = true;
+            foreach ($userID as $user) {
+                $user = StringUtil::trim($user);
+                if (empty($user)) {
+                    throw new ApiException('userID is required', 400);
+                } else if (!is_numeric($user)) {
                     throw new ApiException('userID is invalid', 412);
                 }
-                $userIDs = [$userID];
+                array_push($userIDs, $user);
             }
+        } else {
+            $userID = StringUtil::trim($userID);
+            if (empty($userID)) {
+                throw new ApiException('userID is required', 400);
+            } else if (!is_numeric($userID)) {
+                throw new ApiException('userID is invalid', 412);
+            }
+            $userIDs = [$userID];
         }
 
         $users = User::getUsers($userIDs);
@@ -169,7 +155,7 @@ class UserGroupApi extends BaseApi {
             'addDefaultGroups' => false
         ]);
         $action->executeAction();
-        
+
         return $this->get($groupID);
     }
 }

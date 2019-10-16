@@ -12,19 +12,11 @@ use wbb\data\thread\ThreadList;
  */
 class ThreadApi extends BaseApi {
 
-	/**
-	 * Allowed methods
-	 * @var string[]
-	 */
-    public $allowedMethods = ['index', 'get'];
-
-    public function index() {
-        // $this->checkPermission('trophy.canFetchTrophyData');
-        $userID = isset($_REQUEST['userID']) ? StringUtil::trim($_REQUEST['userID']) : null;
-        $boardID = isset($_REQUEST['boardID']) ? StringUtil::trim($_REQUEST['boardID']) : null;
-        $limit = isset($_REQUEST['limit']) ? StringUtil::trim($_REQUEST['limit']) : 10;
-        $offset = isset($_REQUEST['offset']) ? StringUtil::trim($_REQUEST['offset']) : 0;
-        
+    /**
+     * @api
+     * @permission('trophy.canFetchTrophyData')
+     */
+    public function index($userID = null, $boardID = null, $limit = null, $offset = null) {
         $threadList = new ThreadList();
         
         if (!empty($boardID)) {
@@ -105,9 +97,11 @@ class ThreadApi extends BaseApi {
         return $data;
     }
     
-    public function get($trophyID = null) {
-        $this->checkPermission('trophy.canFetchTrophyData');
-
+    /**
+     * @api
+     * @permission('trophy.canFetchTrophyData')
+     */
+    public function get() {
         $trophyID = $trophyID ? $trophyID : ((isset($_REQUEST['trophyID'])) ? StringUtil::trim($_REQUEST['trophyID']) : null);
 
         if (empty($trophyID)) {

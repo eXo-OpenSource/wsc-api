@@ -13,46 +13,46 @@ class ApiException extends LoggedException {
 	 * @var	integer
 	 */
 	const MISSING_PARAMETERS = 400;
-	
+
 	/**
 	 * session expired
 	 * @var	integer
 	 */
 	const SESSION_EXPIRED = 401;
-	
+
 	/**
 	 * insufficient permissions
 	 * @var	integer
 	 */
 	const INSUFFICIENT_PERMISSIONS = 403;
-	
+
 	/**
 	 * illegal link
 	 * @var	integer
 	 */
 	const ILLEGAL_LINK = 404;
-	
+
 	/**
 	 * bad parameters
 	 * @var	integer
 	 */
 	const BAD_PARAMETERS = 412;
-	
+
 	/**
 	 * internal server error
 	 * @var	integer
 	 */
 	const INTERNAL_ERROR = 503;
-	
+
 	/**
 	 * internal server error
 	 * @var	integer
 	 */
 	const IM_A_TEAPOT = 418;
-	
+
 	/**
 	 * Throws a JSON-encoded error message
-	 * 
+	 *
 	 * @param	string		$message
 	 * @param	integer		$errorType
 	 */
@@ -61,22 +61,22 @@ class ApiException extends LoggedException {
 			'status' => $errorType,
 			'message' => $message
 		];
-		
-		
+
+
 		$statusHeader = '';
 		switch ($errorType) {
 			case self::MISSING_PARAMETERS:
 				$statusHeader = 'HTTP/1.1 400 Bad Request';
 			break;
-			
+
 			case self::SESSION_EXPIRED:
 				$statusHeader = 'HTTP/1.1 409 Conflict';
 			break;
-			
+
 			case self::INSUFFICIENT_PERMISSIONS:
 				$statusHeader = 'HTTP/1.1 403 Forbidden';
 			break;
-			
+
 			case self::BAD_PARAMETERS:
 				$statusHeader = 'HTTP/1.1 400 Bad Request';
 			break;
@@ -89,7 +89,7 @@ class ApiException extends LoggedException {
 				$statusHeader = 'HTTP/1.1 503 Service Unavailable';
 			break;
 		}
-		
+
 		header($statusHeader);
 		header('Content-type: application/json');
 		echo JSON::encode($responseData);

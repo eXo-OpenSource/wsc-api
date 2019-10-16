@@ -10,12 +10,12 @@ class ApiNotificationUserNotificationObjectType extends AbstractUserNotification
 	 * @inheritDoc
 	 */
 	protected static $decoratorClassName = ApiNotificationUserNotificationObject::class;
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	protected static $objectClassName = ApiNotification::class;
-	
+
 	/**
 	 * @inheritDoc
 	 */

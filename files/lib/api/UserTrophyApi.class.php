@@ -14,23 +14,13 @@ use wcf\data\user\User;
  */
 class UserTrophyApi extends BaseApi {
 
-	/**
-	 * Allowed methods
-	 * @var string[]
-	 */
-    public $allowedMethods = ['get', 'add', 'remove'];
-    
+    /**
+     * @api
+     * @permission('trophy.canFetchTrophyData')
+     */
     public function get($userTrophyID = null, $trophyID = null, $userID = null) {
-        $this->checkPermission('trophy.canFetchTrophyData');
-
-        if (empty($userTrophyID) && empty($trophyID) && empty($userID)) {
-            $userTrophyID = isset($_REQUEST['userTrophyID']) ? StringUtil::trim($_REQUEST['userTrophyID']) : null;
-            $trophyID = isset($_REQUEST['trophyID']) ? StringUtil::trim($_REQUEST['trophyID']) : null;
-            $userID = isset($_REQUEST['userID']) ? StringUtil::trim($_REQUEST['userID']) : null;
-        }
-
-        if (empty($userTrophyID) && empty($trophyID) && empty($userID)) {
-            throw new ApiException('userTrophyID or trophyID or userID is missing', 400);
+        if (empty($userTrophyID) || empty($trophyID) || empty($userID)) {
+            throw new ApiException('userTrophyID and trophyID and userID are required', 400);
         }
 
         $trophyList = new UserTrophyList();
@@ -46,7 +36,7 @@ class UserTrophyApi extends BaseApi {
         if (!empty($userID)) {
             $trophyList->getConditionBuilder()->add('userID = ?', [$userID]);
         }
-        
+
         $trophyList->readObjects();
 
         if (sizeof($trophyList) === 0) {
@@ -54,7 +44,7 @@ class UserTrophyApi extends BaseApi {
         }
 
         $data = [];
-        
+
         foreach ($trophyList as $trophy) {
             $userProfile = $trophy->getUserProfile();
             array_push($data, [
@@ -74,19 +64,18 @@ class UserTrophyApi extends BaseApi {
         return $data;
     }
 
-    public function add()
+    /**
+     * @api
+     * @permission('trophy.canTrophyAddUser')
+     */
+    public function add($trophyID, $userID, $description = null)
     {
-        $this->checkPermission('trophy.canTrophyAddUser');
-        $trophyID = (isset($_REQUEST['trophyID'])) ? StringUtil::trim($_REQUEST['trophyID']) : null;
-        $userID = (isset($_REQUEST['userID'])) ? StringUtil::trim($_REQUEST['userID']) : null;
-        $description = (isset($_REQUEST['description'])) ? StringUtil::trim($_REQUEST['description']) : null;
-
         if (empty($trophyID)) {
-            throw new ApiException('trophyID is missing', 400);
+            throw new ApiException('trophyID is required', 400);
         }
 
         if (empty($userID)) {
-            throw new ApiException('userID is missing', 400);
+            throw new ApiException('userID is required', 400);
         }
 
         $trophyList = new TrophyList();
@@ -118,19 +107,18 @@ class UserTrophyApi extends BaseApi {
         (new UserTrophyAction([], 'create', [
             'data' => $data
         ]))->executeAction();
-        
+
         return $this->get(null, $trophyID);
     }
 
-    public function remove()
+    /**
+     * @api
+     * @permission('trophy.canTrophyRemoveUser')
+     */
+    public function remove($userTrophyID = null, $trophyID = null, $userID = null)
     {
-        $this->checkPermission('trophy.canTrophyRemoveUser');
-        $userTrophyID = isset($_REQUEST['userTrophyID']) ? StringUtil::trim($_REQUEST['userTrophyID']) : null;
-        $trophyID = isset($_REQUEST['trophyID']) ? StringUtil::trim($_REQUEST['trophyID']) : null;
-        $userID = isset($_REQUEST['userID']) ? StringUtil::trim($_REQUEST['userID']) : null;
-
-        if (empty($userTrophyID) && empty($trophyID) && empty($userID)) {
-            throw new ApiException('userTrophyID or trophyID and userID is missing', 400);
+        if (empty($userTrophyID) || (empty($trophyID) || empty($userID))) {
+            throw new ApiException('userTrophyID or trophyID and userID are required', 400);
         }
 
         $trophyList = new UserTrophyList();
@@ -150,7 +138,7 @@ class UserTrophyApi extends BaseApi {
 
 		$userTrophyAction = new UserTrophyAction($trophyList->getObjects(), 'delete');
 		$userTrophyAction->executeAction();
-        
+
         return $this->get(null, $trophyID);
     }
 }

@@ -11,23 +11,23 @@ class ApiSecretListPage extends AbstractPage {
 	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.wscApi.secrets.list';
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public $neededPermissions = [];
-	
+
 	/**
 	 * @var	array
 	 */
 	public $secrets = [];
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
-        
+
         $sql = "SELECT *
                 FROM	wcf".WCF_N."_api_secret";
 
@@ -40,13 +40,13 @@ class ApiSecretListPage extends AbstractPage {
             array_push($this->secrets, $row);
         }
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-				
+
 		WCF::getTPL()->assign([
 			'secrets' => $this->secrets
 		]);

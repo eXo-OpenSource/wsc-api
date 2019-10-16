@@ -9,21 +9,21 @@ class ApiNotificationUserNotificationObject extends DatabaseObjectDecorator impl
 	 * @inheritDoc
 	 */
 	protected static $baseClass = ApiNotification::class;
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return $this->getDecoratedObject()->title;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public function getURL() {
 		return $this->getDecoratedObject()->url;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
