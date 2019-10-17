@@ -5,6 +5,7 @@ use wcf\util\StringUtil;
 use wcf\system\exception\ApiException;
 use wcf\action\AbstractAjaxAction;
 use wcf\system\api\ApiSecretPermissionHandler;
+use wcf\system\api\ApiResponse;
 
 /**
  * @author 	Robert Bitschnau
@@ -35,7 +36,7 @@ class BaseApiAction extends AbstractAjaxAction  {
 	 */
     public $class = null;
 
-	
+
 	/**
 	 * @inheritDoc
 	 */
@@ -43,15 +44,7 @@ class BaseApiAction extends AbstractAjaxAction  {
         parent::readParameters();
 		$this->method = isset($_GET['method']) ? StringUtil::trim($_GET['method']) : '';
         $this->secret = isset($_POST['secret']) ? StringUtil::trim($_POST['secret']) : '';
-    }
-    
-	/**
-	 * @inheritDoc
-	 */
-	public function execute() {
-        parent::execute();
 
-        // check if secret exists
         $sql = "SELECT  *
                 FROM    wcf".WCF_N."_api_secret
                 WHERE   secretKey = ?";
@@ -64,43 +57,52 @@ class BaseApiAction extends AbstractAjaxAction  {
         }
 
         $this->secretID = $row['secretID'];
+    }
 
+	/**
+	 * @inheritDoc
+	 */
+	public function execute() {
+        parent::execute();
         try {
             $method = new \ReflectionMethod($this->class, $this->method);
             $doc = $method->getDocComment();
 
-            if ($doc) {
-                if (strpos($doc, '@api')) {
-                    if (strpos($doc, '@permission')) {
-                        preg_match('/@permission\(["\']([^"\']{0,})["\']\)/', $doc, $permission);
-                        if (empty($permission)) {
-                            throw new ApiException('Permission denied', 403);
-                        }
-                        $permission = $permission[1];
-
-                        if (!ApiSecretPermissionHandler::getInstance()->getPermission($this->secretID, $permission)) {
-                            throw new ApiException('Permission denied', 403);
-                        }
+            if ($doc && strpos($doc, '@api')) {
+                if (strpos($doc, '@permission')) {
+                    preg_match('/@permission\(["\']([^"\']{0,})["\']\)/', $doc, $permission);
+                    if (empty($permission)) {
+                        throw new ApiException('Permission denied', 403);
                     }
+                    $permission = $permission[1];
 
-                    $params = $method->getParameters();
-                    $callParams = [];
-
-                    foreach ($params as $param) {
-                        if (isset($_POST[$param->getName()])) {
-                            $callParams[$param->getName()] = StringUtil::trim($_POST[$param->getName()]);
-                        } else {
-                            if ($param->isDefaultValueAvailable()) {
-                                $callParams[$param->getName()] = $param->getDefaultValue();
-                            } else {
-                                throw new ApiException($param->getName() . ' is required', 400);
-                            }
-                        }
+                    if (!ApiSecretPermissionHandler::getInstance()->getPermission($this->secretID, $permission)) {
+                        throw new ApiException('Permission denied', 403);
                     }
-                    $instance = new $this->class($this->secretID);
-                    $result = call_user_func_array([$instance, $this->method], $callParams);
-                    return $this->sendJsonResponse(['status' => 200, 'data' => $result]);
                 }
+
+                $params = $method->getParameters();
+                $callParams = [];
+
+                foreach ($params as $param) {
+                    if (isset($_POST[$param->getName()])) {
+                        $callParams[$param->getName()] = StringUtil::trim($_POST[$param->getName()]);
+                    } else {
+                        if ($param->isDefaultValueAvailable()) {
+                            $callParams[$param->getName()] = $param->getDefaultValue();
+                        } else {
+                            throw new ApiException($param->getName() . ' is required', 400);
+                        }
+                    }
+                }
+                $instance = new $this->class($this->secretID);
+                $result = call_user_func_array([$instance, $this->method], $callParams);
+
+                if (is_object($result) && $result instanceof ApiResponse) {
+                    return $this->sendJsonResponse($result->toArray());
+                }
+
+                return $this->sendJsonResponse(['status' => 200, 'data' => $result]);
             }
             throw new ApiException('method is not callable', 400);
         } catch(\ReflectionException $exception) {
