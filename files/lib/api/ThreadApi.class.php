@@ -101,11 +101,9 @@ class ThreadApi extends BaseApi {
      * @api
      * @permission('trophy.canFetchTrophyData')
      */
-    public function get() {
-        $trophyID = $trophyID ? $trophyID : ((isset($_REQUEST['trophyID'])) ? StringUtil::trim($_REQUEST['trophyID']) : null);
-
+    public function get($trophyID) {
         if (empty($trophyID)) {
-            throw new ApiException('trophyID is missing', 400);
+            throw new ApiException('trophyID is required', 400);
         }
 
 		$trophyList = new TrophyList();

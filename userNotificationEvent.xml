@@ -7,5 +7,12 @@
 			<classname>wcf\system\user\notification\event\WscApiUserNotificationEvent</classname>
 			<preset>1</preset>
 		</event>
+		<event>
+			<name>notification</name>
+			<objecttype>at.megathorx.wsc_api.api_notification_email</objecttype>
+			<classname>wcf\system\user\notification\event\WscApiUserNotificationEvent</classname>
+			<preset>1</preset>
+			<presetmailnotificationtype>instant</presetmailnotificationtype>
+		</event>
 	</import>
 </data>

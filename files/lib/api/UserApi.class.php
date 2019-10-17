@@ -258,9 +258,9 @@ class UserApi extends BaseApi {
             $numKey = str_replace('userOption', '', $key);
             $newOptions[$numKey] = $value;
 
-            if (isset($_REQUEST[$key])) {
+            if (isset($_POST[$key])) {
                 $modifiedOptions = true;
-                $newOptions[$numKey] = $_REQUEST[$key];
+                $newOptions[$numKey] = $_POST[$key];
             }
         }
 
@@ -311,7 +311,7 @@ class UserApi extends BaseApi {
      * @api
      * @permission('user.canCreateNotification')
      */
-    public function notification($userID, $title, $message, $url) {
+    public function notification($userID, $title, $message, $url, $email = false) {
         if (empty($userID)) {
             throw new ApiException('userID is required', 400);
         } else if (!is_numeric($userID)) {
@@ -337,9 +337,15 @@ class UserApi extends BaseApi {
             'time' => time()
         ]);
 
+        $notificationClass = 'at.megathorx.wsc_api.api_notification';
+
+        if ($email) {
+            $notificationClass = 'at.megathorx.wsc_api.api_notification_email';
+        }
+
         UserNotificationHandler::getInstance()->fireEvent(
             'notification',
-            'at.megathorx.wsc_api.api_notification',
+            $notificationClass,
             new ApiNotificationUserNotificationObject($notification),
             [$userID]
         );

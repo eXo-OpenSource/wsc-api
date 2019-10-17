@@ -55,10 +55,8 @@ class UserGroupApi extends BaseApi {
      * @permission('group.canGroupAddMember')
      */
     public function add($groupID, $userID) {
-        $groupID = (isset($_REQUEST['groupID'])) ? StringUtil::trim($_REQUEST['groupID']) : null;
-
         if (empty($groupID)) {
-            throw new ApiException('groupID is missing', 400);
+            throw new ApiException('groupID is required', 400);
         }
 
         if (!is_numeric($groupID)) {

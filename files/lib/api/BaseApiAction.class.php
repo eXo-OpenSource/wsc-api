@@ -35,13 +35,21 @@ class BaseApiAction extends AbstractAjaxAction  {
 	 */
     public $class = null;
 
+	
+	/**
+	 * @inheritDoc
+	 */
+	public function readParameters() {
+        parent::readParameters();
+		$this->method = isset($_GET['method']) ? StringUtil::trim($_GET['method']) : '';
+        $this->secret = isset($_POST['secret']) ? StringUtil::trim($_POST['secret']) : '';
+    }
+    
 	/**
 	 * @inheritDoc
 	 */
 	public function execute() {
         parent::execute();
-		$this->method = (isset($_GET['method'])) ? StringUtil::trim($_GET['method']) : '';
-        $this->secret = (isset($_POST['secret'])) ? StringUtil::trim($_POST['secret']) : '';
 
         // check if secret exists
         $sql = "SELECT  *

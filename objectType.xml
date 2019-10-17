@@ -15,5 +15,12 @@
 			<classname>wcf\system\user\notification\object\type\ApiNotificationUserNotificationObjectType</classname>
 			<category>at.megathorx.wsc_api</category>
 		</type>
+
+		<type>
+			<name>at.megathorx.wsc_api.api_notification_email</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>wcf\system\user\notification\object\type\ApiNotificationUserNotificationObjectType</classname>
+			<category>at.megathorx.wsc_api</category>
+		</type>
     </import>
 </data>

@@ -51,6 +51,11 @@
 		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.thread"><![CDATA[Thread API]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchThreadData"><![CDATA[Daten abrufen]]></item>
 	</category>
+	<category name="wcf.user.notification">
+		<item name="wcf.user.notification.at.megathorx.wsc_api"><![CDATA[WSC API]]></item>
+		<item name="wcf.user.notification.at.megathorx.wsc_api.api_notification.notification"><![CDATA[WSC API Benachrichtigung]]></item>
+		<item name="wcf.user.notification.at.megathorx.wsc_api.api_notification_email.notification"><![CDATA[WSC API E-Mail Benachrichtigung]]></item>
+	</category>
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.admin.wscApi"><![CDATA[WSC API]]></item>
 		<item name="wcf.acp.group.option.admin.wscApi.canManageSecret"><![CDATA[Kann Secrets verwalten]]></item>
