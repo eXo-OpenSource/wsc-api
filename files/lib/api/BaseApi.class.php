@@ -15,7 +15,7 @@ class BaseApi {
 	/**
 	 * @inheritDoc
 	 */
-	public function __constructor($secretID) {
+	public function __construct($secretID) {
         $this->secretID = $secretID;
     }
 }
