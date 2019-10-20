@@ -4,8 +4,8 @@
 		<!-- at.megathorx.wsc_api -->
 		<packagename>WSC-Api</packagename>
 		<packagedescription>WSC-Api</packagedescription>
-		<version>2.0.1</version>
-		<date>2019-10-17</date>
+		<version>2.1.0</version>
+		<date>2019-10-20</date>
 		<license/>
 	</packageinformation>
 	<authorinformation>
@@ -65,6 +65,9 @@
 		<instruction type="userNotificationEvent"/>
 	</instructions>
 	<instructions type="update" fromversion="2.0.0">
+		<instruction type="file"/>
+	</instructions>
+	<instructions type="update" fromversion="2.0.1">
 		<instruction type="file"/>
 	</instructions>
 </package>
