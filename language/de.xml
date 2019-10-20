@@ -50,6 +50,10 @@
 
 		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.thread"><![CDATA[Thread API]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchThreadData"><![CDATA[Daten abrufen]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canCreateThread"><![CDATA[Erstellen]]></item>
+
+		<item name="wcf.acl.option.category.at.megathorx.wsc_api.apiSecret.api.post"><![CDATA[Post API]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchPostData"><![CDATA[Daten abrufen]]></item>
 	</category>
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.at.megathorx.wsc_api"><![CDATA[WSC API]]></item>

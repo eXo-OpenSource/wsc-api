@@ -15,9 +15,12 @@
 			<category name="api.thread">
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</category>
+			<category name="api.post">
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</category>
 			<!-- /api -->
 		</categories>
-		
+
 		<options>
 			<!-- api.user -->
 			<option name="canFetchUserData">
@@ -29,6 +32,10 @@
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</option>
 			<option name="canCreateUser">
+				<categoryname>api.user</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<option name="canDeleteUser">
 				<categoryname>api.user</categoryname>
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</option>
@@ -85,7 +92,18 @@
 				<categoryname>api.thread</categoryname>
 				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
 			</option>
+			<option name="canCreateThread">
+				<categoryname>api.thread</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
 			<!-- /api.thread -->
+
+			<!-- api.post -->
+			<option name="canFetchPostData">
+				<categoryname>api.post</categoryname>
+				<objecttype>at.megathorx.wsc_api.apiSecret</objecttype>
+			</option>
+			<!-- /api.post -->
 		</options>
 	</import>
 </data>

@@ -66,6 +66,30 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @permission('user.canDeleteUser')
+     */
+    public function delete($userID) {
+        $userID = StringUtil::trim($userID);
+        if (empty($userID)) {
+            throw new ApiException('userID is required', 400);
+        } else if (!is_numeric($userID)) {
+            throw new ApiException('userID is invalid', 412);
+        }
+
+        $users = User::getUsers([$userID]);
+
+        if (sizeof($users) === 0) {
+            throw new ApiException('userID is invalid', 412);
+        }
+
+        $action = new UserAction([$users[$userID]], 'delete');
+        $result = $action->executeAction();
+
+        return $result['returnValues'] == 1 ? 'Success' : 'Failed';
+    }
+
+    /**
+     * @api
      * @permission('user.canLoginUser')
      */
     public function login($username, $password) {
