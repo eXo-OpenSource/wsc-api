@@ -5,7 +5,7 @@
 		<packagename>WSC-Api</packagename>
 		<packagedescription>WSC-Api</packagedescription>
 		<version>2.1.0</version>
-		<date>2019-10-20</date>
+		<date>2019-11-21</date>
 		<license/>
 	</packageinformation>
 	<authorinformation>
@@ -31,43 +31,9 @@
 		<instruction type="userNotificationEvent"/>
 		<instruction type="sql">install.sql</instruction>
 	</instructions>
-	<instructions type="update" fromversion="1.3.3">
+	<instructions type="update" fromversion="2.1.0">
 		<instruction type="file"/>
-		<instruction type="language"/>
-		<instruction type="acpTemplate"/>
 		<instruction type="acpMenu"/>
-		<instruction type="objectTypeDefinition"/>
-		<instruction type="objectType"/>
-		<instruction type="aclOption"/>
-		<instruction type="userGroupOption"/>
-		<instruction type="userNotificationEvent"/>
-	</instructions>
-	<instructions type="update" fromversion="1.3.4">
-		<instruction type="file"/>
-		<instruction type="language"/>
 		<instruction type="acpTemplate"/>
-		<instruction type="acpMenu"/>
-		<instruction type="objectTypeDefinition"/>
-		<instruction type="objectType"/>
-		<instruction type="aclOption"/>
-		<instruction type="userGroupOption"/>
-		<instruction type="userNotificationEvent"/>
-	</instructions>
-	<instructions type="update" fromversion="1.3.5">
-		<instruction type="file"/>
-		<instruction type="language"/>
-		<instruction type="acpTemplate"/>
-		<instruction type="acpMenu"/>
-		<instruction type="objectTypeDefinition"/>
-		<instruction type="objectType"/>
-		<instruction type="aclOption"/>
-		<instruction type="userGroupOption"/>
-		<instruction type="userNotificationEvent"/>
-	</instructions>
-	<instructions type="update" fromversion="2.0.0">
-		<instruction type="file"/>
-	</instructions>
-	<instructions type="update" fromversion="2.0.1">
-		<instruction type="file"/>
 	</instructions>
 </package>

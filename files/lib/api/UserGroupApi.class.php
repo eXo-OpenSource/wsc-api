@@ -16,6 +16,7 @@ class UserGroupApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $groupID
      * @permission('group.canFetchGroupData')
      */
     public function get($groupID = null)
@@ -52,6 +53,8 @@ class UserGroupApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $groupID
+     * @param integer|array $userID
      * @permission('group.canGroupAddMember')
      */
     public function add($groupID, $userID) {
@@ -107,6 +110,8 @@ class UserGroupApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $groupID
+     * @param integer|array $userID
      * @permission('group.canGroupRemoveMember')
      */
     public function remove($groupID, $userID) {

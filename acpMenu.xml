@@ -5,11 +5,18 @@
 			<parent>wcf.acp.menu.link.application</parent>
 		</acpmenuitem>
         
+		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets.documentation">
+			<controller>wcf\acp\page\ApiSecretDocumentationPage</controller>
+			<parent>wcf.acp.menu.link.wscApi.secrets</parent>
+			<permissions>admin.wscApi.canManageSecret</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+        
 		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets.list">
 			<controller>wcf\acp\page\ApiSecretListPage</controller>
 			<parent>wcf.acp.menu.link.wscApi.secrets</parent>
 			<permissions>admin.wscApi.canManageSecret</permissions>
-			<showorder>1</showorder>
+			<showorder>2</showorder>
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.wscApi.secrets.add">

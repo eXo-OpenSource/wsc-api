@@ -23,6 +23,9 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @param string $username
+     * @param string $password
+     * @param string $email
      * @permission('user.canCreateUser')
      */
     public function create($username, $password, $email) {
@@ -66,6 +69,7 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $userID
      * @permission('user.canDeleteUser')
      */
     public function delete($userID) {
@@ -90,6 +94,8 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @param string $username
+     * @param string $password
      * @permission('user.canLoginUser')
      */
     public function login($username, $password) {
@@ -115,6 +121,7 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @param integer|array $userID
      * @permission('user.canFetchUserData')
      */
     public function get($userID = null) {
@@ -195,6 +202,7 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @param string $username
      * @permission('user.canFetchUserData')
      */
     public function getByName($username) {
@@ -248,6 +256,9 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $userID
+     * @param string $username
+     * @param integer $wscApiId
      */
 	public function update($userID, $username = null, $wscApiId = null) {
         $data = [];
@@ -333,6 +344,11 @@ class UserApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $userID
+     * @param string $title
+     * @param string $message
+     * @param string $url
+     * @param boolean $email
      * @permission('user.canCreateNotification')
      */
     public function notification($userID, $title, $message, $url, $email = false) {

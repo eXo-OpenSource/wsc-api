@@ -29,7 +29,7 @@
 			</ul>
 		</nav>
 
-        <div id="general" class="tabMenuContent">
+        <div id="general" class="hidden tabMenuContent">
             <div class="section">
                 <dl{if $errorField == 'secretKey'} class="formError"{/if}>
                     <dt><label for="secretKey">{lang}wcf.acp.secret.secret{/lang}</label></dt>
@@ -65,7 +65,7 @@
         </div>
 
         
-        <div id="permissions" class="tabMenuContent">
+        <div id="permissions" class="hidden tabMenuContent">
             <div class="section">
                 <dl id="permissionsContainer">
                     <dd>

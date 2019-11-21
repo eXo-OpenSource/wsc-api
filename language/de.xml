@@ -15,6 +15,7 @@
 	</category>
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.wscApi.secrets"><![CDATA[WSC Api]]></item>
+		<item name="wcf.acp.menu.link.wscApi.secrets.documentation"><![CDATA[Dokumentation]]></item>
 		<item name="wcf.acp.menu.link.wscApi.secrets.list"><![CDATA[Secrets]]></item>
 		<item name="wcf.acp.menu.link.wscApi.secrets.add"><![CDATA[Secret hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.wscApi.secrets.edit"><![CDATA[Secret bearbeiten]]></item>
@@ -33,6 +34,7 @@
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchUserData"><![CDATA[Daten abrufen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canCreateUser"><![CDATA[Erstellen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canLoginUser"><![CDATA[Zugangsdaten prüfen]]></item>
+		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canDeleteUser"><![CDATA[Löschen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserName"><![CDATA[Umbennen]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserWscApiId"><![CDATA[API Id ändern]]></item>
 		<item name="wcf.acl.option.at.megathorx.wsc_api.apiSecret.canUpdateUserOptions"><![CDATA[Profilfelder ändern]]></item>
@@ -63,5 +65,23 @@
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.admin.wscApi"><![CDATA[WSC API]]></item>
 		<item name="wcf.acp.group.option.admin.wscApi.canManageSecret"><![CDATA[Kann Secrets verwalten]]></item>
+	</category>
+	<category name="wcf.api.documentation">
+		<item name="wcf.api.documentation.user"><![CDATA[<h2 class="sectionTitle">{lang}wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchGroupData{/lang}</h2>
+<dl>
+	<dt><label>Endpoint</label></dt>
+	<dd><kbd>{$host}/index.php?user-api&method=get</kbd></dd>
+</dl>
+<dl>
+	<dt><label>Benötigte Parameter</label></dt>
+	<dd><kbd>userID</kbd> - integer</dd>
+</dl>
+<dl>
+	<dt><label>Testen</label></dt>
+	<dd>
+		{include file='__apiTester'}
+	</dd>
+</dl>
+]]></item>
 	</category>
 </language>
