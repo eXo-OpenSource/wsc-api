@@ -14,9 +14,15 @@ class PostApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $threadID
+     * @param integer $postID
+     * @param integer $userID
+     * @param boolean $hasPoll
+     * @param integer $limit
+     * @param integer $offset
      * @permission('post.canFetchPostData')
      */
-    public function get($threadID = null, $postID = null, $userID = null, $hasPoll = null, $limit = null, $offset = null) {
+    public function get($threadID = null, $postID = null, $userID = null, $hasPoll = null, $limit = 10, $offset = 0) {
         if (empty($threadID) && empty($postID)) {
             throw new ApiException('threadID or postID is required', 400);
         }

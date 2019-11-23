@@ -16,6 +16,9 @@ class UserTrophyApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $userTrophyID
+     * @param integer $trophyID
+     * @param integer $userID
      * @permission('trophy.canFetchTrophyData')
      */
     public function get($userTrophyID = null, $trophyID = null, $userID = null) {
@@ -66,6 +69,9 @@ class UserTrophyApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $trophyID
+     * @param integer $userID
+     * @param string $description
      * @permission('trophy.canTrophyAddUser')
      */
     public function add($trophyID, $userID, $description = null)
@@ -113,6 +119,9 @@ class UserTrophyApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $userTrophyID
+     * @param integer $trophyID
+     * @param integer $userID
      * @permission('trophy.canTrophyRemoveUser')
      */
     public function remove($userTrophyID = null, $trophyID = null, $userID = null)

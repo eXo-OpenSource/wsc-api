@@ -14,6 +14,15 @@ class ThreadApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $userID
+     * @param integer $boardID
+     * @param integer $isSticky
+     * @param integer $isDisabled
+     * @param integer $isClosed
+     * @param integer $isDeleted
+     * @param integer $isDone
+     * @param integer $limit
+     * @param integer $offset
      * @permission('thread.canFetchThreadData')
      */
     public function index($userID = null, $boardID = null, $isSticky = null, $isDisabled = null, $isClosed = null, $isDeleted = null, $isDone = null,
@@ -121,6 +130,7 @@ class ThreadApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $threadID
      * @permission('thread.canFetchThreadData')
      */
     public function get($threadID) {
@@ -202,6 +212,18 @@ class ThreadApi extends BaseApi {
 
     /**
      * @api
+     * @param integer $boardID
+     * @param string $title
+     * @param string $message
+     * @param integer $userID
+     * @param string $username
+     * @param integer $enableTime
+     * @param string $tags
+     * @param integer $disabled
+     * @param integer $closed
+     * @param integer $languageID
+     * @param integer $type
+     * @param integer $announcementBoards
      * @permission('thread.canCreateThread')
      */
     public function create($boardID, $title, $message, $userID = null, $username = null, $enableTime = null, $tags = null, $disabled = false, $closed = false, $languageID = null, $type = 0, $announcementBoards = null) {

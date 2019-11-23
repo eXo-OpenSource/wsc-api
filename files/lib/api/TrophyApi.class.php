@@ -19,7 +19,7 @@ class TrophyApi extends BaseApi {
         $trophyList->readObjects();
 
         $data = [];
-        
+
         foreach ($trophyList as $trophy) {
             $category = $trophy->getCategory();
             array_push($data, [
@@ -40,14 +40,15 @@ class TrophyApi extends BaseApi {
                 'badgeColor' => $trophy->badgeColor,
                 'isDisabled' => $trophy->isDisabled,
                 'awardAutomatically' => $trophy->awardAutomatically
-            ]);  
+            ]);
         }
 
         return $data;
     }
-    
+
     /**
      * @api
+     * @param integer $trophyID
      * @permission('trophy.canFetchTrophyData')
      */
     public function get($trophyID = null) {

@@ -27,15 +27,19 @@ class ApiSecretDocumentationPage extends AbstractPage {
 		parent::readData();
 
 		$classes = [
-			'user' => \wcf\api\UserApi::class,
-			'user-group' => \wcf\api\UserGroupApi::class,
+            ['class' => \wcf\api\UserApi::class, 'endpoint' => 'user', 'name' => 'user'],
+            ['class' => \wcf\api\UserGroupApi::class, 'endpoint' => 'user-group', 'name' => 'group'],
+            ['class' => \wcf\api\TrophyApi::class, 'endpoint' => 'trophy', 'name' => 'trophy'],
+            ['class' => \wcf\api\UserTrophyApi::class, 'endpoint' => 'user-trophy', 'name' => 'trophy.user'],
+            ['class' => \wcf\api\PostApi::class, 'endpoint' => 'post', 'name' => 'post'],
+            ['class' => \wcf\api\ThreadApi::class, 'endpoint' => 'thread', 'name' => 'thread'],
 		];
 
-		foreach($classes as $key => $class) {
-			$class = new \ReflectionClass($class);
-			
+		foreach($classes as $class) {
+			$cls = new \ReflectionClass($class['class']);
+
 			$classMethods = [];
-			$methods = $class->getMethods();
+			$methods = $cls->getMethods();
 
 			foreach($methods as $method) {
 				$doc = $method->getDocComment();
@@ -44,20 +48,22 @@ class ApiSecretDocumentationPage extends AbstractPage {
 						'name' => $method->getName(),
 						'params' => [],
 					];
-	
+
 					$params = $method->getParameters();
 					preg_match_all('/@param ([^ ]{0,}) \$([a-zA-Z_-]{1,})/', $doc, $paramHint, PREG_SET_ORDER, 0);
-					
+
 					foreach($params as $param) {
 						$para = [
 							'name' => $param->getName(),
 							'types' => NULL,
 						];
-	
+
+                        $para['hasDefaultValue'] = false;
 						if ($param->isDefaultValueAvailable()) {
+							$para['hasDefaultValue'] = true;
 							$para['defaultValue'] = $param->getDefaultValue();
 						}
-	
+
 						foreach($paramHint as $hint) {
 							if ($hint[2] === $param->getName()) {
 								if (strpos($hint[1], '|')) {
@@ -66,21 +72,18 @@ class ApiSecretDocumentationPage extends AbstractPage {
 									$para['types'] = [$hint[1]];
 								}
 							}
-						}
-	
-						if ($param->isDefaultValueAvailable()) {
-							$para['defaultValue'] = $param->getDefaultValue();
-						}
+                        }
+
 						$para['types_text'] = join(', ', $para['types']);
-	
+
 						array_push($tmp['params'], $para);
 					}
-					
+
 					$classMethods[$method->getName()] = $tmp;
 				}
 			}
 
-			$this->apiData[$key] = $classMethods;
+            array_push($this->apiData, array_merge($class, ['methods' => $classMethods]));
 		}
 	}
 
