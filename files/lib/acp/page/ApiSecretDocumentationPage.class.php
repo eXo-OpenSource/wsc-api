@@ -50,12 +50,13 @@ class ApiSecretDocumentationPage extends AbstractPage {
 					];
 
 					$params = $method->getParameters();
-					preg_match_all('/@param ([^ ]{0,}) \$([a-zA-Z_-]{1,})/', $doc, $paramHint, PREG_SET_ORDER, 0);
+					preg_match_all('/@param ([^ ]{0,}) \$([a-zA-Z_-]{1,}) {0,}([^\n]{0,})/', $doc, $paramHint, PREG_SET_ORDER, 0);
 
 					foreach($params as $param) {
 						$para = [
 							'name' => $param->getName(),
 							'types' => NULL,
+							'description' => NULL,
 						];
 
                         $para['hasDefaultValue'] = false;
@@ -66,6 +67,7 @@ class ApiSecretDocumentationPage extends AbstractPage {
 
 						foreach($paramHint as $hint) {
 							if ($hint[2] === $param->getName()) {
+								$para['description'] = $hint[3] ?: NULL;
 								if (strpos($hint[1], '|')) {
 									$para['types'] = explode('|', $hint[1]);
 								} else {

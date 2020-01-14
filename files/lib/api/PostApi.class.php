@@ -14,12 +14,12 @@ class PostApi extends BaseApi {
 
     /**
      * @api
-     * @param integer $threadID
-     * @param integer $postID
-     * @param integer $userID
-     * @param boolean $hasPoll
-     * @param integer $limit
-     * @param integer $offset
+     * @param integer $threadID   The numerical ID of the Thread.
+     * @param integer $postID     The numerical ID of the Post.
+     * @param integer $userID     The numerical ID of the User.
+     * @param boolean $hasPoll    When set to true it will only show posts which contain a poll.
+     * @param integer $limit      The numer of results per page. Defaults to 10.
+     * @param integer $offset     The offset. Defaults to 0.
      * @permission('post.canFetchPostData')
      */
     public function get($threadID = null, $postID = null, $userID = null, $hasPoll = null, $limit = 10, $offset = 0) {

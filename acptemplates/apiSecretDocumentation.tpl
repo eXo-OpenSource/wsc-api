@@ -49,7 +49,7 @@
             {capture assign='requiredParams'}
 				{foreach from=$method['params'] item=param}
                 {if !$param['hasDefaultValue']}
-				<dd><kbd>{$param['name']}</kbd> - {$param['types_text']}</dd>
+				<dd><kbd>{$param['name']}</kbd> - {$param['types_text']} - {$param['description']}</dd>
                 {/if}
 				{/foreach}
             {/capture}
@@ -58,7 +58,7 @@
             {capture assign='optionalParams'}
 				{foreach from=$method['params'] item=param}
                 {if $param['hasDefaultValue']}
-				<dd><kbd>{$param['name']}</kbd> - {$param['types_text']}{if $param['defaultValue'] != null} - {$param['defaultValue']}{/if}</dd>
+				<dd><kbd>{$param['name']}</kbd> - {$param['types_text']}{if $param['defaultValue'] != null} - {$param['defaultValue']}{/if} - {$param['description']}</dd>
                 {/if}
 				{/foreach}
             {/capture}
