@@ -36,4 +36,8 @@
 		<instruction type="acpMenu"/>
 		<instruction type="acpTemplate"/>
 	</instructions>
+	<instructions type="update" fromversion="2.1.1">
+		<instruction type="file"/>
+		<instruction type="language"/>
+	</instructions>
 </package>

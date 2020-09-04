@@ -70,9 +70,10 @@ class UserApi extends BaseApi {
     /**
      * @api
      * @param integer $userID
+     * @param boolean $renameBeforeDeletion
      * @permission('user.canDeleteUser')
      */
-    public function delete($userID) {
+    public function delete($userID, $renameBeforeDeletion = true) {
         $userID = StringUtil::trim($userID);
         if (empty($userID)) {
             throw new ApiException('userID is required', 400);
@@ -84,6 +85,12 @@ class UserApi extends BaseApi {
 
         if (sizeof($users) === 0) {
             throw new ApiException('userID is invalid', 412);
+        }
+
+        if($renameBeforeDeletion)
+        {
+            $action = new UserAction([$users[$userID]], 'update', ['data' => ['username' => 'Deleted Account']]);
+            $action->executeAction();
         }
 
         $action = new UserAction([$users[$userID]], 'delete');
