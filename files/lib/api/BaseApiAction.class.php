@@ -12,6 +12,7 @@ use wcf\system\api\ApiResponse;
  * @package	at.megathorx.wsc-api
  */
 class BaseApiAction extends AbstractAjaxAction  {
+	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
 	/**
 	 * A valid request method
