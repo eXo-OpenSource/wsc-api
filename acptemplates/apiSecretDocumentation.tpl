@@ -41,38 +41,77 @@
 	<div id="{$data['endpoint']}" class="hidden tabMenuContent">
 		{foreach from=$data['methods'] item=method}
 		<div class="section">
-			<h2 class="sectionTitle">{$method['name']}</h2>
+			<h2 class="sectionTitle">{lang}wcf.api.documentation.{$data['name']}.{$method['name']}{/lang}</h2>
 			<dl>
-				<dt><label>Endpoint</label></dt>
-				<dd><kbd>{$host}/index.php?{$data['endpoint']}-api&method={$method['name']}</kbd></dd>
+				<dt><label>{lang}wcf.api.documentation.endpoint{/lang}</label></dt>
+				<dd>POST <kbd>{$host}/index.php?{$data['endpoint']}-api&method={$method['name']}</kbd></dd>
 			</dl>
             {capture assign='requiredParams'}
-				{foreach from=$method['params'] item=param}
+                {foreach from=$method['params'] item=param}
                 {if !$param['hasDefaultValue']}
-				<dd><kbd>{$param['name']}</kbd> - {$param['types_text']} - {$param['description']}</dd>
+                <tr>
+                    <td><kbd>{$param['name']}</kbd></td>
+                    <td><kbd>{$param['types_text']}</kbd></td>
+                    <td>{lang}wcf.api.documentation.{$data['name']}.{$method['name']}.{$param['name']}{/lang}</td>
+                </tr>
                 {/if}
-				{/foreach}
+                {/foreach}
             {/capture}
             {assign var='requiredParams' value=$requiredParams|trim}
 
             {capture assign='optionalParams'}
-				{foreach from=$method['params'] item=param}
-                {if $param['hasDefaultValue']}
-				<dd><kbd>{$param['name']}</kbd> - {$param['types_text']}{if $param['defaultValue'] != null} - {$param['defaultValue']}{/if} - {$param['description']}</dd>
-                {/if}
-				{/foreach}
+                {foreach from=$method['params'] item=param}
+                    {if $param['hasDefaultValue']}
+                    <tr>
+                        <td><kbd>{$param['name']}</kbd></td>
+                        <td><kbd>{$param['types_text']}</kbd></td>
+                        <td>{if $param['defaultValue'] != null}<kbd>{$param['defaultValue']}</kbd>{/if}</td>
+                        <td>{lang}wcf.api.documentation.{$data['name']}.{$method['name']}.{$param['name']}{/lang}</td>
+                    </tr>
+                    {/if}
+                {/foreach}
             {/capture}
             {assign var='optionalParams' value=$optionalParams|trim}
-            {if !$requiredParams|empty}
 			<dl>
-				<dt><label>Benötigte Parameter</label></dt>
-                {@$requiredParams}
+				<dt><label>{lang}wcf.api.documentation.requiredParameters{/lang}</label></dt>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{lang}wcf.api.documentation.name{/lang}</th>
+                            <th>{lang}wcf.api.documentation.type{/lang}</th>
+                            <th>{lang}wcf.api.documentation.description{/lang}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><kbd>secret</kbd></td>
+                            <td><kbd>string</kbd></td>
+                            <td>{lang}wcf.acp.secret.secret{/lang}</td>
+                        </tr>
+
+                        {if !$requiredParams|empty}
+                            {@$requiredParams}
+                        {/if}
+                    </tbody>
+                </table>
 			</dl>
-            {/if}
             {if !$optionalParams|empty}
 			<dl>
-				<dt><label>Optionale Parameter</label></dt>
-                {@$optionalParams}
+				<dt><label>{lang}wcf.api.documentation.optionalParameters{/lang}</label></dt>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{lang}wcf.api.documentation.name{/lang}</th>
+                            <th>{lang}wcf.api.documentation.type{/lang}</th>
+                            <th>{lang}wcf.api.documentation.defaultValue{/lang}</th>
+                            <th>{lang}wcf.api.documentation.description{/lang}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {@$optionalParams}
+                    </tbody>
+                </table>
 			</dl>
             {/if}
 		</div>

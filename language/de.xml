@@ -68,21 +68,110 @@
 		<item name="wcf.acp.group.option.admin.wscApi.canManageSecret"><![CDATA[Kann Secrets verwalten]]></item>
 	</category>
 	<category name="wcf.api.documentation">
-		<item name="wcf.api.documentation.user"><![CDATA[<h2 class="sectionTitle">{lang}wcf.acl.option.at.megathorx.wsc_api.apiSecret.canFetchGroupData{/lang}</h2>
-<dl>
-	<dt><label>Endpoint</label></dt>
-	<dd><kbd>{$host}/index.php?user-api&method=get</kbd></dd>
-</dl>
-<dl>
-	<dt><label>Benötigte Parameter</label></dt>
-	<dd><kbd>userID</kbd> - integer</dd>
-</dl>
-<dl>
-	<dt><label>Testen</label></dt>
-	<dd>
-		{include file='__apiTester'}
-	</dd>
-</dl>
-]]></item>
+        <item name="wcf.api.documentation.endpoint"><![CDATA[Endpoint]]></item>
+        <item name="wcf.api.documentation.name"><![CDATA[Name]]></item>
+        <item name="wcf.api.documentation.type"><![CDATA[Typ]]></item>
+        <item name="wcf.api.documentation.defaultValue"><![CDATA[Standardwert]]></item>
+        <item name="wcf.api.documentation.description"><![CDATA[Beschreibung]]></item>
+		<item name="wcf.api.documentation.requiredParameters"><![CDATA[Benötigte Parameter]]></item>
+		<item name="wcf.api.documentation.optionalParameters"><![CDATA[Optionale Parameter]]></item>
+
+        <item name="wcf.api.documentation.user.create"><![CDATA[Benutzer anlegen]]></item>
+        <item name="wcf.api.documentation.user.create.username"><![CDATA[Benutzername des neuen Benutzers]]></item>
+        <item name="wcf.api.documentation.user.create.password"><![CDATA[Passwort des neuen Benutzers]]></item>
+        <item name="wcf.api.documentation.user.create.email"><![CDATA[E-Mail des neuen Benutzers]]></item>
+
+        <item name="wcf.api.documentation.user.delete"><![CDATA[Benutzer löschen]]></item>
+        <item name="wcf.api.documentation.user.delete.userID"><![CDATA[ID des Benutzers]]></item>
+        <item name="wcf.api.documentation.user.delete.renameBeforeDeletion"><![CDATA[Benutzer vor der Löschung umbennen]]></item>
+
+        <item name="wcf.api.documentation.user.login"><![CDATA[Anmeldedaten prüfen]]></item>
+        <item name="wcf.api.documentation.user.login.username"><![CDATA[Benutzername]]></item>
+        <item name="wcf.api.documentation.user.login.password"><![CDATA[Passwort]]></item>
+
+        <item name="wcf.api.documentation.user.get"><![CDATA[Benutzerdaten lesen]]></item>
+        <item name="wcf.api.documentation.user.get.userID"><![CDATA[Benutzer ID oder mehrere Benutzer IDs]]></item>
+
+        <item name="wcf.api.documentation.user.getByName"><![CDATA[Benutzerdaten lesen anhand von dem Namen]]></item>
+        <item name="wcf.api.documentation.user.getByName.username"><![CDATA[Benutzername]]></item>
+
+        <item name="wcf.api.documentation.user.update"><![CDATA[Benutzerdaten ändern]]></item>
+        <item name="wcf.api.documentation.user.update.userID"><![CDATA[Benutzer ID]]></item>
+        <item name="wcf.api.documentation.user.update.username"><![CDATA[Neuer Benutzername (falls nicht gefüllt wird dieser nicht geändert)]]></item>
+        <item name="wcf.api.documentation.user.update.wscApiId"><![CDATA[Kundenfeld für eine ID (falls nicht gefüllt wird dieses Feld nicht geändert)]]></item>
+
+        <item name="wcf.api.documentation.user.notification"><![CDATA[Benachrichtigung senden]]></item>
+        <item name="wcf.api.documentation.user.notification.userID"><![CDATA[Benutzer ID]]></item>
+        <item name="wcf.api.documentation.user.notification.title"><![CDATA[Betreff der Benachrichtigung]]></item>
+        <item name="wcf.api.documentation.user.notification.message"><![CDATA[Nachricht der Benachrichtigung]]></item>
+        <item name="wcf.api.documentation.user.notification.url"><![CDATA[URL der Benachrichtigung]]></item>
+        <item name="wcf.api.documentation.user.notification.email"><![CDATA[Ob die Benachrichtigung per E-Mail versandt werden soll]]></item>
+
+        <item name="wcf.api.documentation.group.get"><![CDATA[Gruppendaten lesen]]></item>
+        <item name="wcf.api.documentation.group.get.groupID"><![CDATA[Gruppen ID]]></item>
+
+        <item name="wcf.api.documentation.group.add"><![CDATA[Gruppe Mitglied hinzufügen]]></item>
+        <item name="wcf.api.documentation.group.add.groupID"><![CDATA[Gruppen ID]]></item>
+        <item name="wcf.api.documentation.group.add.userID"><![CDATA[Benutzer ID oder Benutzer IDs]]></item>
+
+        <item name="wcf.api.documentation.group.remove"><![CDATA[Gruppe Mitglied entfernen]]></item>
+        <item name="wcf.api.documentation.group.remove.groupID"><![CDATA[Gruppen ID]]></item>
+        <item name="wcf.api.documentation.group.remove.userID"><![CDATA[Benutzer ID oder Benutzer IDs]]></item>
+
+        <item name="wcf.api.documentation.trophy.index"><![CDATA[Trophäen auflisten]]></item>
+
+        <item name="wcf.api.documentation.trophy.get"><![CDATA[Trophäendaten lesen]]></item>
+        <item name="wcf.api.documentation.trophy.get.trophyID"><![CDATA[Trophäen ID]]></item>
+
+        <item name="wcf.api.documentation.trophy.user.get"><![CDATA[Benutzer Trophäen auflisten]]></item>
+        <item name="wcf.api.documentation.trophy.user.get.userTrophyID"><![CDATA[Benutzer Trophäen ID]]></item>
+        <item name="wcf.api.documentation.trophy.user.get.trophyID"><![CDATA[Trophäen ID]]></item>
+        <item name="wcf.api.documentation.trophy.user.get.userID"><![CDATA[Benutzer ID]]></item>
+
+        <item name="wcf.api.documentation.trophy.user.add"><![CDATA[Benutzer Trophäen hinzufügen]]></item>
+        <item name="wcf.api.documentation.trophy.user.add.trophyID"><![CDATA[Trophäen ID]]></item>
+        <item name="wcf.api.documentation.trophy.user.add.userID"><![CDATA[Benutzer ID]]></item>
+        <item name="wcf.api.documentation.trophy.user.add.description"><![CDATA[Grund]]></item>
+
+        <item name="wcf.api.documentation.trophy.user.remove"><![CDATA[Benutzer Trophäen entfernen]]></item>
+        <item name="wcf.api.documentation.trophy.user.remove.userTrophyID"><![CDATA[Benutzer Trophäen ID]]></item>
+        <item name="wcf.api.documentation.trophy.user.remove.trophyID"><![CDATA[Trophäen ID]]></item>
+        <item name="wcf.api.documentation.trophy.user.remove.userID"><![CDATA[Benutzer ID]]></item>
+
+        <item name="wcf.api.documentation.post.get"><![CDATA[Postdaten lesen]]></item>
+        <item name="wcf.api.documentation.post.get.threadID"><![CDATA[Themen ID]]></item>
+        <item name="wcf.api.documentation.post.get.postID"><![CDATA[Post ID]]></item>
+        <item name="wcf.api.documentation.post.get.userID"><![CDATA[Benutzer ID]]></item>
+        <item name="wcf.api.documentation.post.get.hasPoll"><![CDATA[Hat Umfrage]]></item>
+        <item name="wcf.api.documentation.post.get.limit"><![CDATA[Limit wie viele Einträge zurückgeben werden]]></item>
+        <item name="wcf.api.documentation.post.get.offset"><![CDATA[Offset für die Navigation]]></item>
+
+        <item name="wcf.api.documentation.thread.index"><![CDATA[Threads auflisten]]></item>
+        <item name="wcf.api.documentation.thread.index.userID"><![CDATA[Benutzer ID]]></item>
+        <item name="wcf.api.documentation.thread.index.boardID"><![CDATA[Forum ID]]></item>
+        <item name="wcf.api.documentation.thread.index.isSticky"><![CDATA[Ist angehefet]]></item>
+        <item name="wcf.api.documentation.thread.index.isDisabled"><![CDATA[Ist deaktiviert]]></item>
+        <item name="wcf.api.documentation.thread.index.isClosed"><![CDATA[Ist geschlossen]]></item>
+        <item name="wcf.api.documentation.thread.index.isDeleted"><![CDATA[Ist gelöscht]]></item>
+        <item name="wcf.api.documentation.thread.index.isDone"><![CDATA[Ist abgeschlossen]]></item>
+        <item name="wcf.api.documentation.thread.index.limit"><![CDATA[Limit wie viele Einträge zurückgeben werden]]></item>
+        <item name="wcf.api.documentation.thread.index.offset"><![CDATA[Offset für die Navigation]]></item>
+
+        <item name="wcf.api.documentation.thread.get"><![CDATA[Threaddaten lesen]]></item>
+        <item name="wcf.api.documentation.thread.get.threadID"><![CDATA[Thread ID]]></item>
+
+        <item name="wcf.api.documentation.thread.create"><![CDATA[Thread erstellen]]></item>
+        <item name="wcf.api.documentation.thread.create.boardID"><![CDATA[Forum ID]]></item>
+        <item name="wcf.api.documentation.thread.create.title"><![CDATA[Betreff]]></item>
+        <item name="wcf.api.documentation.thread.create.message"><![CDATA[Nachricht]]></item>
+        <item name="wcf.api.documentation.thread.create.userID"><![CDATA[Benutzer ID]]></item>
+        <item name="wcf.api.documentation.thread.create.username"><![CDATA[Benutzername]]></item>
+        <item name="wcf.api.documentation.thread.create.enableTime"><![CDATA[Aktivieren am]]></item>
+        <item name="wcf.api.documentation.thread.create.tags"><![CDATA[Tags]]></item>
+        <item name="wcf.api.documentation.thread.create.disabled"><![CDATA[Deaktiviert]]></item>
+        <item name="wcf.api.documentation.thread.create.closed"><![CDATA[Schließen]]></item>
+        <item name="wcf.api.documentation.thread.create.languageID"><![CDATA[Sprachen ID]]></item>
+        <item name="wcf.api.documentation.thread.create.type"><![CDATA[Typ]]></item>
+        <item name="wcf.api.documentation.thread.create.announcementBoards"><![CDATA[Ankündings Foren]]></item>
 	</category>
 </language>

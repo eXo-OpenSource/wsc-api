@@ -94,7 +94,7 @@ class ApiSecretDocumentationPage extends AbstractPage {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		// https://docs.hetzner.cloud/#floating-ip-actions-unassign-a-floating-ip
+
 		WCF::getTPL()->assign([
 			'host' => RouteHandler::getHost(),
 			'apiData' => $this->apiData,

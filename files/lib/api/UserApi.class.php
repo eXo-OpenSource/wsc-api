@@ -23,9 +23,9 @@ class UserApi extends BaseApi {
 
     /**
      * @api
-     * @param string $username
-     * @param string $password
-     * @param string $email
+     * @param string $username  The username of the User
+     * @param string $password  The password of the User
+     * @param string $email     The email of the User
      * @permission('user.canCreateUser')
      */
     public function create($username, $password, $email) {
@@ -69,8 +69,8 @@ class UserApi extends BaseApi {
 
     /**
      * @api
-     * @param integer $userID
-     * @param boolean $renameBeforeDeletion
+     * @param integer $userID   The numerical ID of the User
+     * @param boolean $renameBeforeDeletion If the user should be renamed before deletion
      * @permission('user.canDeleteUser')
      */
     public function delete($userID, $renameBeforeDeletion = true) {
@@ -101,8 +101,8 @@ class UserApi extends BaseApi {
 
     /**
      * @api
-     * @param string $username
-     * @param string $password
+     * @param string $username  The username of the User
+     * @param string $password  The password of the User
      * @permission('user.canLoginUser')
      */
     public function login($username, $password) {
@@ -128,7 +128,7 @@ class UserApi extends BaseApi {
 
     /**
      * @api
-     * @param integer|array $userID
+     * @param integer|array $userID The numerical ID of the User or an array of User IDs
      * @permission('user.canFetchUserData')
      */
     public function get($userID = null) {
@@ -209,7 +209,7 @@ class UserApi extends BaseApi {
 
     /**
      * @api
-     * @param string $username
+     * @param string $username  The Username of the User
      * @permission('user.canFetchUserData')
      */
     public function getByName($username) {
@@ -263,9 +263,9 @@ class UserApi extends BaseApi {
 
     /**
      * @api
-     * @param integer $userID
-     * @param string $username
-     * @param integer $wscApiId
+     * @param integer $userID   The numerical ID of the User
+     * @param string $username  The new name of the User
+     * @param integer $wscApiId The WSC API Id of the User - Custom Field
      */
 	public function update($userID, $username = null, $wscApiId = null) {
         $data = [];
@@ -351,11 +351,11 @@ class UserApi extends BaseApi {
 
     /**
      * @api
-     * @param integer $userID
-     * @param string $title
-     * @param string $message
-     * @param string $url
-     * @param boolean $email
+     * @param integer $userID   The numerical ID of the User
+     * @param string $title     The title of the Notification
+     * @param string $message   The message of the Notification
+     * @param string $url       The URL of the Notification
+     * @param boolean $email    Whether the notification should be delivered by mail
      * @permission('user.canCreateNotification')
      */
     public function notification($userID, $title, $message, $url, $email = false) {

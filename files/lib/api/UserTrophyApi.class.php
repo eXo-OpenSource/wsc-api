@@ -23,7 +23,7 @@ class UserTrophyApi extends BaseApi {
      */
     public function get($userTrophyID = null, $trophyID = null, $userID = null) {
         if (empty($userTrophyID) || empty($trophyID) || empty($userID)) {
-            throw new ApiException('userTrophyID and trophyID and userID are required', 400);
+            throw new ApiException('userTrophyID or trophyID or userID are required', 400);
         }
 
         $trophyList = new UserTrophyList();
