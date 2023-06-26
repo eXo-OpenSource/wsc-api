@@ -4,7 +4,7 @@
 		<!-- at.megathorx.wsc_api -->
 		<packagename>WSC-Api</packagename>
 		<packagedescription>WSC-Api</packagedescription>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 		<date>2021-03-13</date>
 		<license/>
 	</packageinformation>
