@@ -13,7 +13,7 @@ class ApiNotificationUserNotificationObject extends DatabaseObjectDecorator impl
 	/**
 	 * @inheritDoc
 	 */
-	public function getTitle() {
+	public function getTitle(): string {
 		return $this->getDecoratedObject()->title;
 	}
 
