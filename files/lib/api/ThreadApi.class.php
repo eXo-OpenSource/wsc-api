@@ -14,6 +14,21 @@ use wcf\system\api\ApiResponse;
  * @package	at.megathorx.wsc-api
  */
 class ThreadApi extends BaseApi {
+    protected $attachmentHandler;
+
+    protected $htmlInputProcessor;
+
+    protected $enableTimeObj;
+
+    protected $subscribeThread;
+
+    protected $optionHandler;
+
+    protected $type;
+
+    protected $boardIDs;
+
+    protected $labelIDs;
 
     /**
      * @api
