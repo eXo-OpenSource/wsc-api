@@ -31,7 +31,7 @@ class WscApiUserNotificationEvent extends AbstractSharedUserNotificationEvent {
 	/**
 	 * @inheritDoc
 	 */
-	public function getTitle() {
+	public function getTitle(): string {
 		return $this->getUserNotificationObject()->title;
 	}
 
@@ -69,7 +69,7 @@ class WscApiUserNotificationEvent extends AbstractSharedUserNotificationEvent {
 	/**
 	 * @inheritDoc
 	 */
-	public function getLink() {
+	public function getLink(): string {
 		return $this->getUserNotificationObject()->url;
 	}
 
