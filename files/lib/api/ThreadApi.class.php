@@ -1,9 +1,12 @@
 <?php
 namespace wcf\api;
 
+use wbb\data\thread\Thread;
+use wbb\data\thread\ThreadAction;
 use wcf\util\StringUtil;
 use wcf\system\exception\ApiException;
 use wbb\data\thread\ThreadList;
+use wbb\system\label\object\ThreadLabelObjectHandler;
 use wcf\system\api\ApiResponse;
 
 /**
