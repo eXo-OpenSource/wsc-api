@@ -23,7 +23,7 @@
 			<controller>wcf\acp\form\ApiSecretAddForm</controller>
 			<parent>wcf.acp.menu.link.wscApi.secrets.list</parent>
 			<permissions>admin.wscApi.canManageSecret</permissions>
-			<icon>fa-plus</icon>
+			<icon>plus</icon>
 		</acpmenuitem>
 	</import>
 </data>

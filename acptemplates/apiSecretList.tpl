@@ -13,7 +13,7 @@
 	
 	<nav class="contentHeaderNavigation">
 		<ul>
-			<li><a href="{link application='wcf' controller='ApiSecretAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.menu.link.wscApi.secrets.add{/lang}</span></a></li>
+			<li><a href="{link application='wcf' controller='ApiSecretAdd'}{/link}" class="button">{icon name='plus' size=16} <span>{lang}wcf.acp.menu.link.wscApi.secrets.add{/lang}</span></a></li>
 			
 			{event name='contentHeaderNavigation'}
 		</ul>
@@ -36,7 +36,7 @@
 				{foreach from=$secrets item=secret}
 					<tr class="jsSecretRow">
 						<td class="columnIcon">
-							<a href="{link controller='ApiSecretEdit' id=$secret.secretID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
+							<a href="{link controller='ApiSecretEdit' id=$secret.secretID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">{icon name='pencil' size=16}</a>
 							<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$secret.secretID}" data-confirm-message-html="{lang}TODO{/lang}"></span>
 						</td>
 						<td>{$secret.secretID}</td>
